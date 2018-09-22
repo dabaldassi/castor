@@ -9,7 +9,9 @@ It uses the library SANDAL2 to handle graphics.
 You need SANDAL2 ( and SDL2 ) to compile it.
 
 ```
->cd actorDesign
+>cd castor
+
+>git submodule add git@github.com:dabaldassi/SANDAL2.git src/SANDAL2
 
 >mkdir build
 
