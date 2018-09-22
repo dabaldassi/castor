@@ -1,4 +1,4 @@
-# ActorDesign
+# Castor
 
 This is a game engine using the actor pattern.
 
