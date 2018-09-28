@@ -15,8 +15,8 @@ typedef enum {KEY_BINDING, RETURN}Options;
 
 #define NAME "hope"
 
-#define FONT_PAUSE "../font/cs_regular.ttf"
-#define FONT_OPTIONS "../font/cs_regular.ttf"
-#define FONT_KEYBIND "../font/cs_regular.ttf"
+#define FONT_PAUSE "/usr/share/fonts/truetype/freefont/cs_regular.ttf"
+#define FONT_OPTIONS "/usr/share/fonts/truetype/freefont/cs_regular.ttf"
+#define FONT_KEYBIND "/usr/share/fonts/truetype/freefont/cs_regular.ttf"
 
 #endif /* SCREEN_H */

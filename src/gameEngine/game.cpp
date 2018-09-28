@@ -182,9 +182,11 @@ void Game::pause()
 {
   createBlock(0, 0, WIDTH, HEIGHT, Color::black, PAUSE_D, 0);
 
-  PauseButton::create("Continuer", 1);
-  PauseButton::create("Option", 2);
-  PauseButton::create("Quitter",3);
+  PauseButton::create("Continuer", 1, PAUSE_D);
+  PauseButton::create("Option", 2, PAUSE_D);
+  PauseButton::create("Quitter",3, PAUSE_D);
+
+  //elem = createButton(0, 0, 100, 50, 20, FONT_PAUSE, text, textColor, quality, couleurBlock, displayCode, plan);
 
   setDisplayCodeWindow(PAUSE_D);
 
@@ -204,8 +206,8 @@ void Game::options()
 
   setDisplayCodeWindow(OPTIONS_D);
 
-  OptionButton::create("Clavier/souris", KEY_BINDING);
-  OptionButton::create("Retour", RETURN);
+  OptionButton::create("Clavier/souris", KEY_BINDING, OPTIONS_D);
+  OptionButton::create("Retour", RETURN, OPTIONS_D);
 
   event_manager(options_statement);
   

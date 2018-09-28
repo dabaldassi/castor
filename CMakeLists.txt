@@ -9,6 +9,7 @@ if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
 	set(CMAKE_CXX_FLAGS "-std=c++14 -Wall -pedantic ${CMAKE_CXX_FLAGS}")
 endif()
 
+include_directories(src)
 
 file(GLOB_RECURSE sandal2_sources src/SANDAL2/*.c)
 add_library(sandal2 ${sandal2_sources})

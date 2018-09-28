@@ -1,6 +1,6 @@
 #include "button.h"
 #include "color.h"
-#include "../screen.h"
+#include "font.h"
 
 void onmotion(Element * e)
 {
@@ -23,10 +23,13 @@ Element * Button::create(float x, float y, float width, float height, float text
   return elem;
 }
 
-void PauseButton::create(const char * text, int id)
+void PauseButton::create(const char * text, int id, int d)
 {
   int     * data;
-  Element * elem = Button::create(WIDTH/4, HEIGHT * id/5.f, WIDTH/2, HEIGHT/5, 50, FONT_PAUSE, text, Color::white, SANDAL2_BLENDED, Color::black, PAUSE_D, 0);
+  int       w,h;
+  
+  getDimensionWindow(&w, &h);
+  Element * elem = Button::create(w/4, h * id/5.f, w/2, h/5, 50, FREE_MONO_BOLD, text, Color::white, SANDAL2_BLENDED, Color::black, d, 0);
 
   data = (int *) malloc(sizeof(int));
   *data = id;
@@ -38,10 +41,14 @@ void PauseButton::create(const char * text, int id)
   setUnMouseMotionElement(elem, unmotion);
 }
 
-void OptionButton::create(const char *text, int id)
+void OptionButton::create(const char *text, int id, int d)
 {
   int     * data;
-  Element * elem = Button::create(WIDTH/4, HEIGHT * id/6, WIDTH/2, HEIGHT/6, 30, FONT_OPTIONS, text, Color::white, SANDAL2_BLENDED, Color::black, OPTIONS_D, 0);
+  int       w,h;
+
+  getDimensionWindow(&w, &h);
+  
+  Element * elem = Button::create(w/4, h * id/6, w/2, h/6, 30, CS_REGULAR, text, Color::white, SANDAL2_BLENDED, Color::black, d, 0);
 
   data = (int *) malloc(sizeof(int));
   *data = id;
@@ -51,10 +58,14 @@ void OptionButton::create(const char *text, int id)
   setFreeDataElement(elem, free);
 }
 
-void KeyBindingButton::create(const char * text, int id)
+void KeyBindingButton::create(const char * text, int id, int d)
 {
   int     * data = NULL;
-  Element * elem = Button::create(2*WIDTH/3, id*HEIGHT/12.f, WIDTH/8, HEIGHT / 12, 50, FONT_KEYBIND, text, Color::white, SANDAL2_BLENDED, Color::black, KB_D, 0);
+  int       w,h;
+
+  getDimensionWindow(&w, &h);
+  
+  Element * elem = Button::create(2*w/3, id*h/12.f, w/8, h / 12, 50, FREE_MONO , text, Color::white, SANDAL2_BLENDED, Color::black, d, 0);
 
   data = (int *) malloc(sizeof(int));
   *data = id;

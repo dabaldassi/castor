@@ -19,7 +19,7 @@ class KeyBindingText : public Text
 public:
   KeyBindingText();
 
-  static void create(const char * text, int id);
+  static void create(const char * text, int id, int d);
   
   virtual ~KeyBindingText();
 };

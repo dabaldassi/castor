@@ -31,7 +31,7 @@ class PauseButton : public Button
 public:
   PauseButton(){}
 
-  static void create(const char * text, int id);
+  static void create(const char * text, int id, int d);
   
   virtual ~PauseButton(){}
 };
@@ -42,7 +42,7 @@ class OptionButton : public Button
 public:
   OptionButton(){}
 
-  static void create(const char * text, int id);
+  static void create(const char * text, int id, int d);
   
   virtual ~OptionButton(){}
 };
@@ -51,7 +51,7 @@ class KeyBindingButton : public Button
 {
  public:
 
-  static void create(const char * text, int id);
+  static void create(const char * text, int id, int d);
 };
 
 #endif /* BUTTON_H */

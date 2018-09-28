@@ -46,17 +46,17 @@ void keybindings()
 
   setDisplayCodeWindow(KB_D);
   
-  KeyBindingText::create("Droite", RIGHT);
-  KeyBindingText::create("Gauche", LEFT);
-  KeyBindingText::create("Avant", FORWARD);
-  KeyBindingText::create("Attaque", ATTACK);
-  KeyBindingText::create("Arriere", BACK);
-  KeyBindingText::create("Carte", MAP);
-  KeyBindingText::create("Interagir", INTERACT);
-  KeyBindingText::create("Pause", PAUSE);
+  KeyBindingText::create("Droite", RIGHT, KB_D);
+  KeyBindingText::create("Gauche", LEFT, KB_D);
+  KeyBindingText::create("Avant", FORWARD, KB_D);
+  KeyBindingText::create("Attaque", ATTACK, KB_D);
+  KeyBindingText::create("Arriere", BACK, KB_D);
+  KeyBindingText::create("Carte", MAP, KB_D);
+  KeyBindingText::create("Interagir", INTERACT, KB_D);
+  KeyBindingText::create("Pause", PAUSE, KB_D);
   
   for (int i = 0; i < NB_CUSTOM_KEYS; i++)
-    KeyBindingButton::create(Keyboard::getKeyName(Keyboard::binding[i]).c_str(), i);
+    KeyBindingButton::create(Keyboard::getKeyName(Keyboard::binding[i]).c_str(), i, KB_D);
   
 }
 
