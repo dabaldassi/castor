@@ -2,7 +2,6 @@
 
 #include "controlable.h"
 
-#include "../../screen.h"
 #include "../../stage.h"
 
 #include "../../ihm/color.h"
@@ -17,7 +16,7 @@ Controlable::Controlable(std::string name, Position pos):Character(name, pos)
   
   _speed = INIT_SPEED_CONTROLABLE;
   _life = 100.f;
-  _position = Position(WIDTH/2.f, HEIGHT/2.f, 100,100);
+  //_position = Position(WIDTH/2.f, HEIGHT/2.f, 100,100);
 }
 
 void Controlable::act(float dt)
@@ -58,15 +57,17 @@ void Controlable::searchCollision()
 void Controlable::moveCamera()
 {
   float x,y;
+  int   w,h;
 
+  getDimensionWindow(&w, &h);
   getCoordElement(_elem, &x, &y);
-  _stage->viewport().x += ((x+_position.w/2) - WIDTH/2 )*0.1;
-  _stage->viewport().y += ( HEIGHT/2 - (y+_position.h/2))*0.1;
+  _stage->viewport().x += ((x+_position.w/2) - w/2 )*0.1;
+  _stage->viewport().y += ( h/2 - (y+_position.h/2))*0.1;
 }
 
 void Controlable::loadSprite()
 {
-  _elem = createBlock(_position.x - (_position.w/2), _position.y - _position.h/2, 100, 100, Color::blue, GAME, 0);
+  _elem = createBlock(_position.x - (_position.w/2), _position.y - _position.h/2, 100, 100, Color::blue, 0, 0);
 }
 
 void Controlable::save(std::ofstream &out)

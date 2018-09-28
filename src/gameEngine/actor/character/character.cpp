@@ -1,6 +1,5 @@
 #include "character.h"
 #include "../../ihm/color.h"
-#include "../../screen.h"
 
 using actor::Character;
 

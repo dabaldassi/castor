@@ -4,16 +4,45 @@
 #include <ctime>
 
 #include "game.h"
-#include "screen.h"
-#include "stage.h"
 
 #include "ihm/keyboard.h"
 #include "ihm/button.h"
 #include "ihm/options.h"
 #include "ihm/color.h"
 
-Game::Game():stage{WIDTH, HEIGHT}
+Game::Game():stage{0,0}
 {}
+
+Game::Game(int w, int h):stage{w,h}
+{
+  int          black[4] = {255,0,0,0};
+  DataWindow * dataw = (DataWindow *) malloc(sizeof(DataWindow));
+
+  if(dataw)
+    {
+      dataw->game = this;
+      dataw->param = 1;
+    }
+
+  setFreeDataWindow(free);
+  
+  if(initAllSANDAL2(IMG_INIT_JPG))
+    {
+      puts("Failed to init SANDAL2");
+    }
+
+  createWindow(w, h, "Super Game", /*SDL_WINDOW_FULLSCREEN_DESKTOP*/ 0, black, GAME_D);
+
+  if(initIteratorWindow())
+    {
+      closeAllSANDAL2();
+      fprintf(stderr, "Failed to open window \n");
+    }
+
+  setDataWindow(dataw);
+
+  Keyboard::init();
+}
 
 /**
  *\fn bool run_statement()
@@ -86,10 +115,10 @@ bool options_statement(float dt)
       Keyboard::keys[PAUSE] = false;
 
       /* If it's the not the option menu display, clear the current display and set the option menu */
-      if(d != OPTIONS_D)
+      if(d != Game::OPTIONS_D)
 	{
 	  clearDisplayCode(d);
-	  setDisplayCodeWindow(OPTIONS_D);
+	  setDisplayCodeWindow(Game::OPTIONS_D);
 	}
       else
 	return false;
@@ -172,15 +201,19 @@ void Game::run()
   stage.generate();
   //stage.load();
   
-  setDisplayCodeWindow(GAME);
+  setDisplayCodeWindow(GAME_D);
   event_manager(run_statement);
-  clearDisplayCode(GAME);
+  clearDisplayCode(GAME_D);
   stage.save();
 }
 
 void Game::pause()
 {
-  createBlock(0, 0, WIDTH, HEIGHT, Color::black, PAUSE_D, 0);
+  int w,h;
+
+  getDimensionWindow(&w, &h);
+  
+  createBlock(0, 0, w, h, Color::black, PAUSE_D, 0);
 
   PauseButton::create("Continuer", 1, PAUSE_D);
   PauseButton::create("Option", 2, PAUSE_D);
@@ -197,12 +230,16 @@ void Game::pause()
   }
   
   clearDisplayCode(PAUSE_D);
-  setDisplayCodeWindow(GAME);
+  setDisplayCodeWindow(GAME_D);
 }
 
 void Game::options()
 {
-  createBlock(0, 0, WIDTH, HEIGHT, Color::black, OPTIONS_D, 0);
+  int w,h;
+
+  getDimensionWindow(&w, &h);
+  
+  createBlock(0, 0, w, h, Color::black, OPTIONS_D, 0);
 
   setDisplayCodeWindow(OPTIONS_D);
 
@@ -214,3 +251,5 @@ void Game::options()
   clearDisplayCode(OPTIONS_D);
   setDisplayCodeWindow(PAUSE_D);
 }
+
+

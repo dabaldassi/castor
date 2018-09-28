@@ -12,8 +12,7 @@
 namespace actor {
 
   class Controlable;
-  class Food;
-
+  
 }  // Namespace
 
 enum ObjectiveEvent { FOOD };
@@ -29,6 +28,7 @@ private:
 
 public:
   actor::Controlable * player; /* Some actor need to interact with the player */
+  
   /**
    * \param width the width of the windows
    * \param height the height of the windows

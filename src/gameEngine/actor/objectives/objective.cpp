@@ -2,7 +2,6 @@
 
 #include "objective.h"
 
-#include "../../screen.h"
 #include "../../stage.h"
 
 #include "../../ihm/color.h"
@@ -28,7 +27,7 @@ void Objective::update(Viewport const & vp)
 
 void Objective::loadSprite()
 {
-  _elem = createText(_position.x, _position.y, _position.w, _position.h, 60, OBJ_FONT,(_name + " " +  std::to_string(_current) + " / " + std::to_string(_limit)).c_str(), Color::white, SANDAL2_BLENDED, GAME, 2);
+  _elem = createText(_position.x, _position.y, _position.w, _position.h, 60, OBJ_FONT,(_name + " " +  std::to_string(_current) + " / " + std::to_string(_limit)).c_str(), Color::white, SANDAL2_BLENDED, 0, 2);
 }
 
 void Objective::save(std::ofstream &out)

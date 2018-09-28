@@ -1,6 +1,5 @@
 #include "../../SANDAL2/SANDAL2.h"
 #include "keyboard.h"
-#include "../screen.h"
 #include "color.h"
 #include "text.h"
 #include "button.h"
@@ -42,21 +41,25 @@ void click_keybind(Element * elem,int c)
 
 void keybindings()
 {
-  createBlock(0, 0, WIDTH, HEIGHT, Color::black, KB_D, 0);
+  int w, h;
 
-  setDisplayCodeWindow(KB_D);
+  getDimensionWindow(&w, &h);
   
-  KeyBindingText::create("Droite", RIGHT, KB_D);
-  KeyBindingText::create("Gauche", LEFT, KB_D);
-  KeyBindingText::create("Avant", FORWARD, KB_D);
-  KeyBindingText::create("Attaque", ATTACK, KB_D);
-  KeyBindingText::create("Arriere", BACK, KB_D);
-  KeyBindingText::create("Carte", MAP, KB_D);
-  KeyBindingText::create("Interagir", INTERACT, KB_D);
-  KeyBindingText::create("Pause", PAUSE, KB_D);
+  createBlock(0, 0, w, h, Color::black, Game::KB_D, 0);
+
+  setDisplayCodeWindow(Game::KB_D);
+  
+  KeyBindingText::create("Droite", RIGHT, Game::KB_D);
+  KeyBindingText::create("Gauche", LEFT, Game::KB_D);
+  KeyBindingText::create("Avant", FORWARD, Game::KB_D);
+  KeyBindingText::create("Attaque", ATTACK, Game::KB_D);
+  KeyBindingText::create("Arriere", BACK, Game::KB_D);
+  KeyBindingText::create("Carte", MAP, Game::KB_D);
+  KeyBindingText::create("Interagir", INTERACT, Game::KB_D);
+  KeyBindingText::create("Pause", PAUSE, Game::KB_D);
   
   for (int i = 0; i < NB_CUSTOM_KEYS; i++)
-    KeyBindingButton::create(Keyboard::getKeyName(Keyboard::binding[i]).c_str(), i, KB_D);
+    KeyBindingButton::create(Keyboard::getKeyName(Keyboard::binding[i]).c_str(), i, Game::KB_D);
   
 }
 

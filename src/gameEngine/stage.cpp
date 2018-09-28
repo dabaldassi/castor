@@ -2,8 +2,6 @@
 #include <fstream>
 #include <iostream>
 
-#include "screen.h"
-
 #include "stage.h"
 
 #include "actor/character/controlable.h"
@@ -121,8 +119,12 @@ void Stage::generate()
   /*std::cout << typeid(actor::Npc).hash_code() << "\n";
 
     std::cout << typeid(*_actors.back().get()).hash_code() << " " << _actors.back().get()->getName() << "\n";*/
+
+  int w,h;
+
+  getDimensionWindow(&w, &h);
   
-  player = &create<actor::Controlable>("Jack", Position(WIDTH/2, HEIGHT/2, 100,100));
+  player = &create<actor::Controlable>("Jack", Position(w/2, h/2, 100,100));
   create<actor::Mob>("cow", 10, Position(0,0,233,170));
   
   //std::cout << typeid(*_actors.back().get()).hash_code() << " " << typeid(actor::PassiveMob).hash_code() << "\n";

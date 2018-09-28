@@ -1,6 +1,5 @@
 #include "../../SANDAL2/SANDAL2.h"
 #include "actor.h"
-#include "../screen.h"
 
 using actor::Actor;
 
@@ -75,5 +74,5 @@ void Actor::load(std::ifstream &in)
 
 void Actor::loadSprite(const char path[])
 {
-  _elem = createImage(_position.x, _position.y, _position.w, _position.h, (path + _name + ".png").c_str(), GAME, 0);
+  _elem = createImage(_position.x, _position.y, _position.w, _position.h, (path + _name + ".png").c_str(), 0, 0);
 }

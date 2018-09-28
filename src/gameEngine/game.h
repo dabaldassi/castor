@@ -3,6 +3,10 @@
 
 #include "stage.h"
 
+#define NB_OPTIONS 2
+
+typedef enum {KEY_BINDING, RETURN}Options;
+
 /**
  *\class Game
  *\brief Class which handle the event loop of the game
@@ -22,7 +26,14 @@ private:
 public:
   Stage stage;
   
+  static constexpr const int GAME_D = 0;
+  static constexpr const int PAUSE_D = 1;
+  static constexpr const int MENU_D = 2;
+  static constexpr const int OPTIONS_D = 3;
+  static constexpr const int KB_D = 3;
+  
   Game();
+  Game(int w, int h);
 
   /**
    *\fn void run()

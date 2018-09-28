@@ -2,7 +2,6 @@
 
 #include "mob.h"
 
-#include "../../screen.h"
 #include "../../stage.h"
 
 using actor::Mob;
