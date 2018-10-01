@@ -73,11 +73,11 @@ bool Hitbox::collide(Position& p, int orientation, float speed)
 {
   bool collision = false;
   
-  if(_pos.use)
+  if(_pos && _pos->use)
     {
-      collision = _pos.collide(p);
+      collision = _pos->collide(p);
       if(speed != 0 && collision)
-	correctPosition(p, orientation, speed, _pos);
+	correctPosition(p, orientation, speed, *_pos);
     }
   else
     {
@@ -151,8 +151,8 @@ void Hitbox::addLine(LineBox l)
 {
   _shape.push_back(l);
 
-  if(_pos.use)
-    _pos.use = false;
+  if(_pos && _pos->use)
+    _pos->use = false;
 }
 
 void Hitbox::save(std::ofstream &out)
@@ -166,7 +166,7 @@ void Hitbox::save(std::ofstream &out)
   
       if(length == 0)
 	{
-	  _pos.save(out);
+	  _pos->save(out);
 	}
       else
 	{
@@ -189,7 +189,7 @@ void Hitbox::load(std::ifstream &in)
       in.read((char *)&length, sizeof(int));
 
       if(length == 0)
-	_pos.load(in);
+	_pos->load(in);
       else
 	{
 	  for(int i=0; i<length; i++)

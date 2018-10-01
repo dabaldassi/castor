@@ -19,19 +19,23 @@ Controlable::Controlable(std::string name, Position pos):Character(name, pos)
   //_position = Position(WIDTH/2.f, HEIGHT/2.f, 100,100);
 }
 
-void Controlable::act(float dt)
+void Controlable::move()
 {
   int   o[16] = {_orientation,N,S,_orientation,E,NE,SE,E,W,NW,SW,W,_orientation,N,S,_orientation};
-
- 
-  /* move de perso */
   
   _position.x += _speed * (ihm::Keyboard::keys[RIGHT] - ihm::Keyboard::keys[LEFT]);
   _position.y += _speed * (ihm::Keyboard::keys[FORWARD] - ihm::Keyboard::keys[BACK]);
 
-  _hitbox.setPosition(_position);
+  //_hitbox.setPosition(_position);
 
   _orientation = o[(ihm::Keyboard::keys[RIGHT]<<3) + (ihm::Keyboard::keys[LEFT]<<2) + (ihm::Keyboard::keys[BACK]<<1) + ihm::Keyboard::keys[FORWARD]];
+}
+
+void Controlable::act(float dt)
+{
+  /* move de perso */
+  
+  move();
    
   moveCamera();
   

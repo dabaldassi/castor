@@ -1,3 +1,10 @@
+/**
+ *\file building.h
+ *\author dabaldassi
+ *\date 07/2018
+ */
+
+
 #ifndef BUILDING_H
 #define BUILDING_H
 

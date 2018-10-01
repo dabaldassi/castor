@@ -37,6 +37,7 @@ namespace actor {
     virtual void saveAnnexe(std::ofstream & out);
     virtual void moveCamera();
     virtual void searchCollision();
+    virtual void move();
   };
 
   

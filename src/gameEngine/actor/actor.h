@@ -44,7 +44,7 @@ namespace actor {
       :_elem(nullptr), _life(life), _name(name) {}
     
     Actor(std::string name, float life, Position pos)
-      :_position(pos),_elem(nullptr), _life(life), _name(name), _hitbox(pos) { _orientation = N; }
+      :_position(pos),_elem(nullptr), _life(life), _name(name), _hitbox(&_position) { _orientation = N; }
     
     virtual ~Actor();
 

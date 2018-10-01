@@ -32,17 +32,17 @@ struct LineBox
 class Hitbox
 {
 private:
-  Position               _pos;
+  Position             * _pos;
   std::vector<LineBox>   _shape;
 public:
   bool use;
   
-  Hitbox():_pos(false), use(true) {}
-  Hitbox(Position pos):_pos(pos), use(true) {}
+  Hitbox():_pos(NULL), use(true) {}
+  Hitbox(Position * pos):_pos(pos), use(true) {}
 
   void addLine(LineBox l);
   bool collide(Position& p, int orientation = 0 , float speed = 0);
-  void setPosition(const Position & p) { _pos = p; }
+  void setPosition(Position * p) { _pos = p; }
   void save(std::ofstream & out);
   void load(std::ifstream & in);
   

@@ -34,7 +34,7 @@ void Mob::act(float dt)
       _position.x += _speed * ((_orientation == W || _orientation == NW || _orientation == SW) - (_orientation == E || _orientation == NE || _orientation == SE));
       _position.y += _speed * ((_orientation == N || _orientation == NW || _orientation == NE) - (_orientation == S || _orientation == SE || _orientation == SW));
       --_distance;
-      _hitbox.setPosition(_position);
+      //_hitbox.setPosition(_position);
 
       /* Search for collision */
   

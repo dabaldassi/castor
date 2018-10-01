@@ -74,5 +74,10 @@ void Actor::load(std::ifstream &in)
 
 void Actor::loadSprite(const char path[])
 {
+  int black[] = {0,0,0,0};
+ 
   _elem = createImage(_position.x, _position.y, _position.w, _position.h, (path + _name + ".png").c_str(), 0, 0);
+  
+  if(_elem == NULL)
+    _elem = createBlock(_position.x, _position.y, _position.w, _position.h, black, 0, 0);
 }
