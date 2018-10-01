@@ -7,51 +7,59 @@ void click_pause(Element * elem, int);
 void click_options(Element * elem, int);
 void click_keybind(Element * elem, int);
 
-/**
- *\class Button
- *\brief Manage a button with SANDAL2
- */
 
-class Button
-{
-private:
-public:
+namespace ihm {
+
+  /**
+   *\class Button
+   *\brief Manage a button with SANDAL2
+   */
+
+  class Button
+  {
+  private:
+  public:
   
-  static Element * create(float x, float y, float width, float height, float texteSize, const char *font, const char *text, int *textColor, int quality, int *couleurBlock, int displayCode, int plan);
-  virtual ~Button(){}
-};
+    static Element * create(float x, float y, float width, float height, float texteSize, const char *font, const char *text, int *textColor, int quality, int *couleurBlock, int displayCode, int plan);
+    virtual ~Button(){}
+  };
 
-/**
- *\class PauseButton
- *\brief Button that will be dislayed on the pause screen
- */
+  /**
+   *\class PauseButton
+   *\brief Button that will be dislayed on the pause screen
+   */
 
-class PauseButton : public Button
-{
-public:
-  PauseButton(){}
+  class PauseButton : public Button
+  {
+  public:
+    PauseButton(){}
 
-  static void create(const char * text, int id, int d);
+    static void create(const char * text, int id, int d);
   
-  virtual ~PauseButton(){}
-};
+    virtual ~PauseButton(){}
+  };
 
+  /**
+   *\class PauseButton
+   *\brief Button that will be dislayed on the option screen
+   */
 
-class OptionButton : public Button
-{
-public:
-  OptionButton(){}
+  class OptionButton : public Button
+  {
+  public:
+    OptionButton(){}
 
-  static void create(const char * text, int id, int d);
+    static void create(const char * text, int id, int d);
   
-  virtual ~OptionButton(){}
-};
+    virtual ~OptionButton(){}
+  };
 
-class KeyBindingButton : public Button
-{
- public:
+  class KeyBindingButton : public Button
+  {
+  public:
 
-  static void create(const char * text, int id, int d);
-};
+    static void create(const char * text, int id, int d);
+  };
+}  // ihm
 
 #endif /* BUTTON_H */

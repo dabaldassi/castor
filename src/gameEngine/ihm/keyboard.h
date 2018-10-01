@@ -22,33 +22,37 @@ typedef enum {
   WHEEL_DOWN
 }Keys;
 
-/**
- *\struct Keyboard
- *\brief Handle all the keyboard and mouse event
- */
 
-struct Keyboard
-{
-  static int  binding[NB_KEYS]; /* Binding used */
-  static bool keys[NB_KEYS]; /* Which key has been pressed */
-
-  static void init();
-  static void onclick(int);
-  static void keypressed(SDL_Keycode c);
-  static void keyreleased(SDL_Keycode c);
-  static void loadbindings();
-  static void savebindings();
-  static void wheel(int);
+namespace ihm {
   
   /**
-   *\fn static void getKeyName(const char key[], int id)
-   *\brief Get the name of the key by its id
-   *\param key Array of char in which will be wwritten the name
+   *\struct Keyboard
+   *\brief Handle all the keyboard and mouse event
    */
-  static std::string getKeyName(int id);
-  static void search(int, bool);
-  
-};
 
+  struct Keyboard
+  {
+    static int  binding[NB_KEYS]; /* Binding used */
+    static bool keys[NB_KEYS]; /* Which key has been pressed */
+
+    static void init();
+    static void onclick(int);
+    static void keypressed(SDL_Keycode c);
+    static void keyreleased(SDL_Keycode c);
+    static void loadbindings();
+    static void savebindings();
+    static void wheel(int);
+  
+    /**
+     *\fn static void getKeyName(const char key[], int id)
+     *\brief Get the name of the key by its id
+     *\param key Array of char in which will be wwritten the name
+     */
+    static std::string getKeyName(int id);
+    static void search(int, bool);
+  
+  };
+
+}  // ihm
 
 #endif /* KEYBOARD_H */

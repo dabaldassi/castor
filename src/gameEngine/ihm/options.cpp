@@ -25,18 +25,18 @@ void click_keybind(Element * elem,int c)
     switch(event.type)
       {
       case SDL_KEYDOWN:
-	Keyboard::binding[*id] = event.key.keysym.sym;
+	ihm::Keyboard::binding[*id] = event.key.keysym.sym;
 	run = false;
 	break;
       case SDL_MOUSEBUTTONDOWN:
-	Keyboard::binding[*id] = event.button.button;
+	ihm::Keyboard::binding[*id] = event.button.button;
 	run = false;
 	break;
       }
   }
 
-  setTextElement(elem, Keyboard::getKeyName(Keyboard::binding[*id]).c_str());
-  Keyboard::savebindings();
+  setTextElement(elem, ihm::Keyboard::getKeyName(ihm::Keyboard::binding[*id]).c_str());
+  ihm::Keyboard::savebindings();
 }
 
 void keybindings()
@@ -49,21 +49,21 @@ void keybindings()
 
   setDisplayCodeWindow(Game::KB_D);
   
-  KeyBindingText::create("Droite", RIGHT, Game::KB_D);
-  KeyBindingText::create("Gauche", LEFT, Game::KB_D);
-  KeyBindingText::create("Avant", FORWARD, Game::KB_D);
-  KeyBindingText::create("Attaque", ATTACK, Game::KB_D);
-  KeyBindingText::create("Arriere", BACK, Game::KB_D);
-  KeyBindingText::create("Carte", MAP, Game::KB_D);
-  KeyBindingText::create("Interagir", INTERACT, Game::KB_D);
-  KeyBindingText::create("Pause", PAUSE, Game::KB_D);
+  ihm::KeyBindingText::create("Droite", RIGHT, Game::KB_D);
+  ihm::KeyBindingText::create("Gauche", LEFT, Game::KB_D);
+  ihm::KeyBindingText::create("Avant", FORWARD, Game::KB_D);
+  ihm::KeyBindingText::create("Attaque", ATTACK, Game::KB_D);
+  ihm::KeyBindingText::create("Arriere", BACK, Game::KB_D);
+  ihm::KeyBindingText::create("Carte", MAP, Game::KB_D);
+  ihm::KeyBindingText::create("Interagir", INTERACT, Game::KB_D);
+  ihm::KeyBindingText::create("Pause", PAUSE, Game::KB_D);
   
   for (int i = 0; i < NB_CUSTOM_KEYS; i++)
-    KeyBindingButton::create(Keyboard::getKeyName(Keyboard::binding[i]).c_str(), i, Game::KB_D);
+    ihm::KeyBindingButton::create(ihm::Keyboard::getKeyName(ihm::Keyboard::binding[i]).c_str(), i, Game::KB_D);
   
 }
 
 void ret()
 {
-  Keyboard::keys[PAUSE] = true;
+  ihm::Keyboard::keys[PAUSE] = true;
 }

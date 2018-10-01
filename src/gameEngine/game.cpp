@@ -41,7 +41,7 @@ Game::Game(int w, int h):stage{w,h}
 
   setDataWindow(dataw);
 
-  Keyboard::init();
+  ihm::Keyboard::init();
 }
 
 /**
@@ -55,9 +55,9 @@ bool run_statement(float dt)
 
   if(!getDataWindow((void **)&data) && data)
     {
-      if(Keyboard::keys[PAUSE])
+      if(ihm::Keyboard::keys[PAUSE])
 	{
-	  Keyboard::keys[PAUSE] = false;
+	  ihm::Keyboard::keys[PAUSE] = false;
 	  data->game->pause();
 	}
   
@@ -78,9 +78,9 @@ bool pause_statement(float dt)
   bool          ret = true;
   DataWindow  * data = NULL;
 
-  if(Keyboard::keys[PAUSE])
+  if(ihm::Keyboard::keys[PAUSE])
     {
-      Keyboard::keys[PAUSE] = false;
+      ihm::Keyboard::keys[PAUSE] = false;
       ret = false;
     }
   else
@@ -109,10 +109,10 @@ bool options_statement(float dt)
 {
   int d;
   
-  if(Keyboard::keys[PAUSE])
+  if(ihm::Keyboard::keys[PAUSE])
     {
       getDisplayCodeWindow(&d);
-      Keyboard::keys[PAUSE] = false;
+      ihm::Keyboard::keys[PAUSE] = false;
 
       /* If it's the not the option menu display, clear the current display and set the option menu */
       if(d != Game::OPTIONS_D)
@@ -215,9 +215,9 @@ void Game::pause()
   
   createBlock(0, 0, w, h, Color::black, PAUSE_D, 0);
 
-  PauseButton::create("Continuer", 1, PAUSE_D);
-  PauseButton::create("Option", 2, PAUSE_D);
-  PauseButton::create("Quitter",3, PAUSE_D);
+  ihm::PauseButton::create("Continuer", 1, PAUSE_D);
+  ihm::PauseButton::create("Option", 2, PAUSE_D);
+  ihm::PauseButton::create("Quitter",3, PAUSE_D);
 
   //elem = createButton(0, 0, 100, 50, 20, FONT_PAUSE, text, textColor, quality, couleurBlock, displayCode, plan);
 
@@ -226,7 +226,7 @@ void Game::pause()
   event_manager(pause_statement);
 
   for (int i = 0; i < NB_KEYS; i++) { // Avoid interference with game display
-    Keyboard::keys[i] = false;
+    ihm::Keyboard::keys[i] = false;
   }
   
   clearDisplayCode(PAUSE_D);
@@ -243,8 +243,8 @@ void Game::options()
 
   setDisplayCodeWindow(OPTIONS_D);
 
-  OptionButton::create("Clavier/souris", KEY_BINDING, OPTIONS_D);
-  OptionButton::create("Retour", RETURN, OPTIONS_D);
+  ihm::OptionButton::create("Clavier/souris", KEY_BINDING, OPTIONS_D);
+  ihm::OptionButton::create("Retour", RETURN, OPTIONS_D);
 
   event_manager(options_statement);
   

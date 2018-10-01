@@ -1,6 +1,6 @@
-
-
 #include "keyboard.h"
+
+using ihm::Keyboard;
 
 bool Keyboard::keys[NB_KEYS];
 int  Keyboard::binding[NB_KEYS];

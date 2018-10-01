@@ -2,6 +2,11 @@
 #include "color.h"
 #include "font.h"
 
+using ihm::Button;
+using ihm::OptionButton;
+using ihm::KeyBindingButton;
+using ihm::PauseButton;
+
 void onmotion(Element * e)
 {
   setTextColorElement(e, Color::yellow);

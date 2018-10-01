@@ -26,12 +26,12 @@ void Controlable::act(float dt)
  
   /* move de perso */
   
-  _position.x += _speed * (Keyboard::keys[RIGHT] - Keyboard::keys[LEFT]);
-  _position.y += _speed * (Keyboard::keys[FORWARD] - Keyboard::keys[BACK]);
+  _position.x += _speed * (ihm::Keyboard::keys[RIGHT] - ihm::Keyboard::keys[LEFT]);
+  _position.y += _speed * (ihm::Keyboard::keys[FORWARD] - ihm::Keyboard::keys[BACK]);
 
   _hitbox.setPosition(_position);
 
-  _orientation = o[(Keyboard::keys[RIGHT]<<3) + (Keyboard::keys[LEFT]<<2) + (Keyboard::keys[BACK]<<1) + Keyboard::keys[FORWARD]];
+  _orientation = o[(ihm::Keyboard::keys[RIGHT]<<3) + (ihm::Keyboard::keys[LEFT]<<2) + (ihm::Keyboard::keys[BACK]<<1) + ihm::Keyboard::keys[FORWARD]];
    
   moveCamera();
   
