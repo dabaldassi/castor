@@ -1,3 +1,9 @@
+/**
+ *\file position.h
+ *\author dabaldassi
+ *\date 07/2018
+ */
+
 #ifndef POSITION_H
 #define POSITION_H
 

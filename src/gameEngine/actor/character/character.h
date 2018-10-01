@@ -1,3 +1,10 @@
+/**
+ *\file character.h
+ *\author dabaldassi
+ *\date 07/2018
+ */
+
+
 #ifndef CHARACTER_H
 #define CHARACTER_H
 

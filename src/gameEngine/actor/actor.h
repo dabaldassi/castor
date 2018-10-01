@@ -1,3 +1,10 @@
+/**
+ *\file actor.h
+ *\author dabaldassi
+ *\date 07/2018
+ */
+
+
 #ifndef ACTOR_H
 #define ACTOR_H
 

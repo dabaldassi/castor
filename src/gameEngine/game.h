@@ -1,3 +1,10 @@
+/**
+ *\file game.h
+ *\author dabaldassi
+ *\date 07/2018
+ */
+
+
 #ifndef GAME_H
 #define GAME_H
 

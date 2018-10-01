@@ -1,3 +1,9 @@
+/**
+ *\file hitbox.h
+ *\author dabaldassi
+ *\date 07/2018
+ */
+
 #ifndef HITBOX_H
 #define HITBOX_H
 

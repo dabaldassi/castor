@@ -1,3 +1,10 @@
+/**
+ *\file item.h
+ *\author dabaldassi
+ *\date 07/2018
+ */
+
+
 #ifndef ITEM_H
 #define ITEM_H
 

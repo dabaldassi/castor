@@ -1,3 +1,9 @@
+/**
+ *\file stage.h
+ *\author dabaldassi
+ *\date 07/2018
+ */
+
 #ifndef STAGE_H
 #define STAGE_H
 
