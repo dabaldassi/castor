@@ -50,7 +50,7 @@ namespace actor {
 
     void setStage(Stage * stage) { _stage = stage; }
 
-    std::string getName() const { return _name; }
+    virtual std::string getName() const { return _name; }
 
     /** Called by the stage for each step of the game */
     virtual void act(float dt) = 0;
@@ -67,7 +67,7 @@ namespace actor {
     virtual bool isDead() const { return _life <= 0; }
 
     virtual void kill() { _life = 0; }
-
+    
     /**
      *\fn virtual void save(std::ofstream & out)
      *\brief Save the data of the actor in a binary file

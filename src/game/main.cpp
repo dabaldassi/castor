@@ -14,6 +14,6 @@ int main(int argc, char *argv[])
   game.stage.create<actor::Building>("bloc", Position(200, 200, 100, 100));
   
   game.run();
- 
+  
   return EXIT_SUCCESS;
 }

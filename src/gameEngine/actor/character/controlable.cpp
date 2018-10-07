@@ -19,7 +19,7 @@ Controlable::Controlable(std::string name, Position pos):Character(name, pos)
   //_position = Position(WIDTH/2.f, HEIGHT/2.f, 100,100);
 }
 
-void Controlable::move()
+void Controlable::move(float dt)
 {
   int   o[16] = {_orientation,N,S,_orientation,E,NE,SE,E,W,NW,SW,W,_orientation,N,S,_orientation};
   
@@ -42,20 +42,6 @@ void Controlable::act(float dt)
   /* Search for collision */
   
   searchCollision();
-}
-
-void Controlable::searchCollision()
-{
-  for(auto & a: _stage->actors())
-    {
-      if(a.get() == this)
-	continue;
-      else
-	if(a.get()->getHitbox().use && a.get()->getHitbox().collide(_position, _orientation, _speed))
-	  {
-	    a.get()->effect();
-	  }
-    }
 }
 
 void Controlable::moveCamera()

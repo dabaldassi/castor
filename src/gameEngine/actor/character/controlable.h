@@ -9,7 +9,6 @@
 #define CONTROLABLE_H
 
 #include "character.h"
-#include "../items/item.h"
 
 #define INIT_SPEED_CONTROLABLE 3.f
 
@@ -22,8 +21,6 @@ namespace actor {
   
   class Controlable : public Character
   {
-  private:
-    float      _speed;
   public:
     Controlable(){}
     Controlable(std::string name, Position pos);
@@ -36,8 +33,7 @@ namespace actor {
     virtual void loadAnnexe(std::ifstream & in);
     virtual void saveAnnexe(std::ofstream & out);
     virtual void moveCamera();
-    virtual void searchCollision();
-    virtual void move();
+    virtual void move(float dt = 0);
   };
 
   

@@ -7,18 +7,25 @@ using actor::Character;
 //                                 Character                                  //
 ///////////////////////////////////////////////////////////////////////////////
 
-Character::Character(std::string name, Position pos):Actor(name, 100, pos)
+Character::Character(std::string name, Position pos):Moveable(name, 100, pos)
 {
 }
 
-void Character::effect()
-{}
+void Character::update(Viewport const & vp)
+{
+  Moveable::update(vp);
+}
+
+void Character::searchCollision()
+{
+  Moveable::searchCollision();
+}
 
 void Character::save(std::ofstream &out)
 {
   if(out.is_open())
     {
-      Actor::save(out);
+      Moveable::save(out);
     }
 }
 
@@ -26,6 +33,6 @@ void Character::load(std::ifstream &in)
 {
   if(in.is_open())
     {
-      Actor::load(in);
+      Moveable::load(in);
     }
 }
