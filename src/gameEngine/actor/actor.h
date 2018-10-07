@@ -8,8 +8,7 @@
 #ifndef ACTOR_H
 #define ACTOR_H
 
-#include <iostream>
-#include <fstream>
+#include <iosfwd>
 
 #include "../viewport.h"
 
