@@ -31,6 +31,7 @@ private:
   Actors   _actors;
   Viewport _vp;
   int      _objectiveEvent[NB_OBJ_EVENT];
+  std::function<void(Stage *)> gen;
 
 public:
   actor::Controlable * player; /* Some actor need to interact with the player */
@@ -92,6 +93,7 @@ public:
    */
   
   void generate();
+  void setGenerate(std::function<void(Stage * stage)> g) { gen = g; } 
 
   //void eventObj(const actor::Food * food);
   int  getObjEvent(int event);

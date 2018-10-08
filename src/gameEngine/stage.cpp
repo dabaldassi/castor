@@ -98,13 +98,12 @@ void Stage::load()
       for(int i=0; i < length; ++i)
 	{
 	  in.read((char *) &hash, sizeof(size_t));
-	  //std::cout << hash << "\n";
+	  
 	  create(hash);
 
 	  _actors.back().get()->load(in);
 	  _actors.back().get()->loadSprite();
 	  _actors.back().get()->loadAnnexe(in);
-	  //std::cout << _actors.back().get()->getName() << "\n";
 	}
     }
 
@@ -113,21 +112,7 @@ void Stage::load()
 
 void Stage::generate()
 {
-  
-  //create<actor::Npc>("Sasha", Skills(0,0,0,0,0), Position(WIDTH/4, HEIGHT/4, 10,10));
-  
-  /*std::cout << typeid(actor::Npc).hash_code() << "\n";
-
-    std::cout << typeid(*_actors.back().get()).hash_code() << " " << _actors.back().get()->getName() << "\n";*/
-
-  int w,h;
-
-  getDimensionWindow(&w, &h);
-  
-  player = &create<actor::Controlable>("Jack", Position(w/2, h/2, 100,100));
-  create<actor::Mob>("cow", 10, Position(0,0,233,170));
-  
-  //std::cout << typeid(*_actors.back().get()).hash_code() << " " << typeid(actor::PassiveMob).hash_code() << "\n";
+  gen(this);
 }
 
 int Stage::getObjEvent(int event)

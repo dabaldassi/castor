@@ -33,11 +33,11 @@ private:
 public:
   Stage stage;
   
-  static constexpr const int GAME_D = 0;
-  static constexpr const int PAUSE_D = 1;
-  static constexpr const int MENU_D = 2;
-  static constexpr const int OPTIONS_D = 3;
-  static constexpr const int KB_D = 3;
+  static constexpr int GAME_D = 0;
+  static constexpr int PAUSE_D = 1;
+  static constexpr int MENU_D = 2;
+  static constexpr int OPTIONS_D = 3;
+  static constexpr int KB_D = 3;
   
   Game();
   Game(int w, int h);
@@ -46,7 +46,7 @@ public:
    *\fn void run()
    *\brief Set the game in run mode 
    */
-  void run();
+  void run(std::function<void (Stage *)> generate = nullptr);
 
   /**
    *\fn void pause()

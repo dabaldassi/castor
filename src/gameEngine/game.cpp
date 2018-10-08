@@ -32,7 +32,8 @@ Game::Game(int w, int h):stage{w,h}
     }
 
   createWindow(w, h, "Super Game", /*SDL_WINDOW_FULLSCREEN_DESKTOP*/ 0, black, GAME_D);
-
+  
+  
   if(initIteratorWindow())
     {
       closeAllSANDAL2();
@@ -194,17 +195,19 @@ void Game::event_manager(bool (*statement)(float))
   
 }
 
-void Game::run()
+void Game::run(std::function<void(Stage *)> generate)
 {
   std::srand(std::time(nullptr));
+
+  if(generate) stage.setGenerate(generate);
   
   stage.generate();
-  //stage.load();
   
   setDisplayCodeWindow(GAME_D);
   event_manager(run_statement);
   clearDisplayCode(GAME_D);
-  stage.save();
+  
+  //stage.save();
 }
 
 void Game::pause()
