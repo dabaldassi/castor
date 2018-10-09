@@ -16,7 +16,7 @@ namespace actor {
     Moveable(std::string name, float life, Position p):
       Actor(name, life, p) {}
 
-    virtual void act(float dt) = 0;
+    //virtual void act(float dt) = 0;
     virtual void update(Viewport const & vp);
     virtual void effect(){}
     virtual void load(std::ifstream & in);

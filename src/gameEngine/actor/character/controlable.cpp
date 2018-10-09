@@ -25,23 +25,25 @@ void Controlable::move(float dt)
   
   _position.x += _speed * (ihm::Keyboard::keys[RIGHT] - ihm::Keyboard::keys[LEFT]);
   _position.y += _speed * (ihm::Keyboard::keys[FORWARD] - ihm::Keyboard::keys[BACK]);
-
-  //_hitbox.setPosition(_position);
-
+  
   _orientation = o[(ihm::Keyboard::keys[RIGHT]<<3) + (ihm::Keyboard::keys[LEFT]<<2) + (ihm::Keyboard::keys[BACK]<<1) + ihm::Keyboard::keys[FORWARD]];
 }
 
 void Controlable::act(float dt)
 {
-  /* move de perso */
+  if(_actfct.size() != 0) Actor::act(dt);
+  else {
+      
+    /* move de perso */
+    
+    move();
+    
+    moveCamera();
   
-  move();
-   
-  moveCamera();
+    /* Search for collision */
   
-  /* Search for collision */
-  
-  searchCollision();
+    searchCollision();
+  }
 }
 
 void Controlable::moveCamera()

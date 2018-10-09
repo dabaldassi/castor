@@ -23,8 +23,7 @@ namespace actor {
   public:
     Objective(){}
     Objective(std::string name, int limit, int id);
-
-    virtual void act(float dt) = 0;
+    
     virtual void update(Viewport const & vp);
     virtual void effect(){}
     virtual void loadSprite();

@@ -93,6 +93,12 @@ public:
    */
   
   void generate();
+
+  /**
+   *\fn void setGenerate(std::function<void(Stage * stage)> g)
+   *\brief Set your own function to generate the stage
+   */
+  
   void setGenerate(std::function<void(Stage * stage)> g) { gen = g; } 
 
   //void eventObj(const actor::Food * food);

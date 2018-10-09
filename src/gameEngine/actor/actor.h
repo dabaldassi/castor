@@ -9,6 +9,7 @@
 #define ACTOR_H
 
 #include <iosfwd>
+#include <functional>
 
 #include "../viewport.h"
 
@@ -35,6 +36,8 @@ namespace actor {
     std::string _name;
     int         _orientation;
     Hitbox      _hitbox;
+
+    std::vector<std::function<void(Actor *, float)>> _actfct;
     
   public:
     Actor();
@@ -52,7 +55,7 @@ namespace actor {
     virtual std::string getName() const { return _name; }
 
     /** Called by the stage for each step of the game */
-    virtual void act(float dt) = 0;
+    virtual void act(float dt);
 
     /** Called to draw the actor */
     virtual void update(Viewport const & vp);
@@ -66,6 +69,8 @@ namespace actor {
     virtual bool isDead() const { return _life <= 0; }
 
     virtual void kill() { _life = 0; }
+
+    virtual void addActStatement(std::function<void(Actor *, float)> fct) {_actfct.push_back(fct);}
     
     /**
      *\fn virtual void save(std::ofstream & out)

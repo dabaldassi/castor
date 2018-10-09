@@ -17,6 +17,12 @@ void Actor::update(Viewport const & vp)
     }
 }
 
+void Actor::act(float dt)
+{
+  for(auto a: _actfct)
+    a(this, dt);
+}
+
 Actor::Actor()
 {
   _elem = NULL;

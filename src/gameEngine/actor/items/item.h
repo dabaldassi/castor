@@ -31,8 +31,7 @@ namespace actor {
     void setOnGround() { _onTheGround = true; }
     bool isOnTheGround() const { return _onTheGround; }
     float getWeight() const { return _weight; }
-
-    virtual void act(float dt){};
+    
     virtual void effect();
     virtual void update();
     virtual void loadSprite() { Actor::loadSprite("../sprites/items/"); }

@@ -24,7 +24,7 @@ namespace actor {
   public:
     Controlable(){}
     Controlable(std::string name, Position pos);
-    
+
     virtual void act(float dt);
     virtual void effect(){}
     virtual void loadSprite();

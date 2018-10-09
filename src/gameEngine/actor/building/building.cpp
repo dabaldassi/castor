@@ -21,11 +21,6 @@ Building::Building(std::string name, Position pos):Actor(name,1, pos)
 
 }
 
-void Building::act(float dt)
-{
-
-}
-
 void Building::effect()
 {
   if(_stage->player->getHitbox().collide(_trigger))
