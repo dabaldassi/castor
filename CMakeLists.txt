@@ -17,6 +17,7 @@ target_link_libraries(sandal2
   SDL2
   SDL2_ttf
   SDL2_image
+  SDL2_mixer
   )
 
 file(GLOB_RECURSE ${CMAKE_PROJECT_NAME}_sources src/${CMAKE_PROJECT_NAME}/*.cpp)

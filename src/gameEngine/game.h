@@ -60,7 +60,7 @@ public:
    */
   void options();
   
-  virtual ~Game(){}
+  virtual ~Game();
 };
 
 /**

@@ -3,6 +3,8 @@
 #include <cstdlib>
 #include <ctime>
 
+#include <SDL2/SDL_mixer.h>
+
 #include "game.h"
 
 #include "ihm/keyboard.h"
@@ -31,6 +33,16 @@ Game::Game(int w, int h):stage{w,h}
       puts("Failed to init SANDAL2");
     }
 
+  if(SDL_Init(SDL_INIT_AUDIO) < 0)
+    {
+      puts("Failed to init audio !");
+    }
+
+  if(Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT,2,2048) < 0)
+    {
+      puts("SDL_Mixer error");
+    }
+
   createWindow(w, h, "Super Game", /*SDL_WINDOW_FULLSCREEN_DESKTOP*/ 0, black, GAME_D);
   
   
@@ -45,6 +57,14 @@ Game::Game(int w, int h):stage{w,h}
   ihm::Keyboard::init();
 }
 
+Game::~Game()
+{
+  Mix_Quit();
+  
+  closeAllWindow(); /* close all windows */
+  closeAllSANDAL2();
+}
+
 /**
  *\fn bool run_statement()
  *\brief Statement which will be executed in run mode
@@ -52,7 +72,7 @@ Game::Game(int w, int h):stage{w,h}
 
 bool run_statement(float dt)
 {
-  DataWindow  * data = NULL;
+  DataWindow * data = NULL;
 
   if(!getDataWindow((void **)&data) && data)
     {

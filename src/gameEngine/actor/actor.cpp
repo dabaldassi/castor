@@ -50,6 +50,10 @@ Actor::~Actor()
       delElement(_elem);
       _elem = NULL;
     }
+
+  for (unsigned int i = 0; i < _sounds.size(); i++) {
+    Mix_FreeMusic(_sounds[i]);
+  }
 }
 
 void Actor::save(std::ofstream &out)
@@ -98,4 +102,25 @@ void Actor::loadSprite(const char path[])
   
   if(_elem == NULL)
     _elem = createBlock(_position.x, _position.y, _position.w, _position.h, black, 0, 0);
+}
+
+void Actor::addSound(const char *path)
+{
+  Mix_Music * sound;
+
+  sound = Mix_LoadMUS(path);
+
+  if(sound) {
+    _sounds.push_back(sound);
+  }
+  else
+    std::cerr << "Failed to open : " << path << "\n";
+}
+
+void Actor::playSound(unsigned int id)
+{
+  if(id < _sounds.size()) {
+    if(!Mix_PlayingMusic())
+      Mix_PlayMusic(_sounds[id], 0);
+  }
 }
