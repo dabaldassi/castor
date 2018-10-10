@@ -25,7 +25,6 @@ namespace actor {
     Objective(std::string name, int limit, int id);
     
     virtual void update(Viewport const & vp);
-    virtual void effect(){}
     virtual void loadSprite();
     virtual void save(std::ofstream & out);
     virtual void load(std::ifstream & in);

@@ -24,8 +24,6 @@ namespace actor {
     Character(){}
     Character(std::string name, Position pos);
     
-    // virtual void act(float dt){}
-    virtual void effect() = 0;
     virtual void loadSprite() = 0;
     virtual void move(float dt = 0) = 0;
     virtual void load(std::ifstream & in);

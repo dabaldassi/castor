@@ -10,8 +10,7 @@ void Actor::update(Viewport const & vp)
   if (_elem)
     {
       Position pos = _position;
-      /*pos.x -= pos.w/2;
-	pos.y += pos.h/2;*/
+
       replaceElement(_elem, mToP * (pos.x - vp.x), mToP * (vp.height - pos.y + vp.y));
       setDimensionElement(_elem, mToP * pos.w, mToP * pos.h);
     }
@@ -21,6 +20,19 @@ void Actor::act(float dt)
 {
   for(auto a: _actfct)
     a(this, dt);
+}
+
+void Actor::effect()
+{
+  for(auto a: _effectfct)
+    a(this);
+}
+
+
+void Actor::effect(Actor * actor)
+{
+  for(auto a: _effectfct2)
+    a(this, actor);
 }
 
 Actor::Actor()

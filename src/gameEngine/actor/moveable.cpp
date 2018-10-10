@@ -38,7 +38,7 @@ void Moveable::searchCollision()
       else
 	if(a.get()->getHitbox().use && a.get()->getHitbox().collide(_position, _orientation, _speed))
 	  {
-	    a.get()->effect();
+	    /*a.get()->*/effect(a.get());
 	  }
     }
 }

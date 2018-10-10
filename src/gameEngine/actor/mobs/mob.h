@@ -30,7 +30,6 @@ namespace actor {
     Mob(std::string name, float life, Position pos);
 
     virtual void act(float dt);
-    virtual void effect(){};
     virtual void loadSprite() { Moveable::loadSprite("../sprites/mobs/"); }
     virtual void save(std::ofstream & out);
     virtual void load(std::ifstream & in);

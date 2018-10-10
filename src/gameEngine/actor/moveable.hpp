@@ -18,7 +18,6 @@ namespace actor {
 
     //virtual void act(float dt) = 0;
     virtual void update(Viewport const & vp);
-    virtual void effect(){}
     virtual void load(std::ifstream & in);
     virtual void save(std::ofstream & out);
     virtual void loadSprite(const char path[]);

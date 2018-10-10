@@ -38,6 +38,8 @@ namespace actor {
     Hitbox      _hitbox;
 
     std::vector<std::function<void(Actor *, float)>> _actfct;
+    std::vector<std::function<void(Actor *)>> _effectfct;
+    std::vector<std::function<void(Actor *, Actor *)>> _effectfct2;
     
   public:
     Actor();
@@ -64,13 +66,19 @@ namespace actor {
 
     virtual Hitbox getHitbox() const { return _hitbox; }
 
-    virtual void effect() = 0;
+    virtual void effect();
+
+    virtual void effect(Actor *);
 
     virtual bool isDead() const { return _life <= 0; }
 
     virtual void kill() { _life = 0; }
 
     virtual void addActStatement(std::function<void(Actor *, float)> fct) {_actfct.push_back(fct);}
+
+    virtual void addEffectStatement(std::function<void(Actor *)> fct) {_effectfct.push_back(fct);}
+
+    virtual void addEffectStatement(std::function<void(Actor *, Actor *)> fct) {_effectfct2.push_back(fct);}
     
     /**
      *\fn virtual void save(std::ofstream & out)

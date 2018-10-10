@@ -13,6 +13,20 @@ void move(actor::Actor * c, float dt)
 {
   // Cast the actor in Controlable to call the move function of controlable
   dynamic_cast<actor::Controlable *>(c)->move(dt);
+  dynamic_cast<actor::Controlable *>(c)->moveCamera();
+  dynamic_cast<actor::Controlable *>(c)->searchCollision();
+  
+}
+
+void effect(actor::Actor * c, actor::Actor * c2)
+{
+  std::cout << c->getName() << ": salut" << "\n";
+  
+}
+
+void effectCow(actor::Actor *c, actor::Actor * c2)
+{
+  std::cout << c->getName() << ": meuh" << "\n";
 }
 
 void generate(Stage * stage)
@@ -23,7 +37,9 @@ void generate(Stage * stage)
   
   stage->player = &(stage->create<actor::Controlable>("Jack", Position(w/2, h/2, 100,100))); // Create an actor controlable
   stage->player->addActStatement(move); // Add a statement to the actor
-  stage->create<actor::Mob>("cow", 10, Position(0,0,233,170)); // Create a mob
+  stage->player->addEffectStatement(effect);
+  
+  stage->create<actor::Mob>("cow", 10, Position(0,0,233,170)).addEffectStatement(effectCow); // Create a mob
   stage->create<actor::Building>("bloc", Position(200, 200, 100, 100)); // Create o bloc
 }
 
