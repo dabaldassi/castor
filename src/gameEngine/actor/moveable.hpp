@@ -8,6 +8,8 @@ namespace actor {
 
   class Moveable : public Actor
   {
+  private:
+    std::vector<Actor *> _collisions;
   protected:
     float _speed;
   public:
