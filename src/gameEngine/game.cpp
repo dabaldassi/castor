@@ -15,7 +15,7 @@
 Game::Game():stage{0,0}
 {}
 
-Game::Game(int w, int h):stage{w,h}
+Game::Game(int w, int h, const char * name):stage{w,h}
 {
   int          black[4] = {255,0,0,0};
   DataWindow * dataw = (DataWindow *) malloc(sizeof(DataWindow));
@@ -43,7 +43,7 @@ Game::Game(int w, int h):stage{w,h}
       puts("SDL_Mixer error");
     }
 
-  createWindow(w, h, "Super Game", /*SDL_WINDOW_FULLSCREEN_DESKTOP*/ 0, black, GAME_D);
+  createWindow(w, h, name, /*SDL_WINDOW_FULLSCREEN_DESKTOP*/ SDL_WINDOW_RESIZABLE, black, GAME_D);
   
   
   if(initIteratorWindow())

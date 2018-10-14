@@ -55,9 +55,9 @@ namespace actor {
     
     virtual ~Actor();
 
-    void setStage(Stage * stage) { _stage = stage; }
+    virtual void setStage(Stage * stage) { _stage = stage; }
 
-    virtual std::string getName() const { return _name; }
+    virtual const std::string & getName() const { return _name; }
 
     /** Called by the stage for each step of the game */
     virtual void act(float dt);
@@ -65,9 +65,9 @@ namespace actor {
     /** Called to draw the actor */
     virtual void update(Viewport const & vp);
 
-    virtual Position getPosition() const { return _position; }
+    virtual const Position & getPosition() const { return _position; }
 
-    virtual Hitbox getHitbox() const { return _hitbox; }
+    virtual Hitbox & getHitbox()  { return _hitbox; }
 
     virtual void effect();
 

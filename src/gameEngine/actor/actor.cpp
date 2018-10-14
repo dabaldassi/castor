@@ -120,7 +120,6 @@ void Actor::addSound(const char *path)
 void Actor::playSound(unsigned int id)
 {
   if(id < _sounds.size()) {
-    if(!Mix_PlayingMusic())
-      Mix_PlayMusic(_sounds[id], 0);
+    Mix_PlayMusic(_sounds[id], 0);
   }
 }

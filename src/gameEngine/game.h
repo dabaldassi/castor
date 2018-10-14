@@ -40,7 +40,7 @@ public:
   static constexpr int KB_D = 3;
   
   Game();
-  Game(int w, int h);
+  Game(int w, int h, const char * name);
 
   /**
    *\fn void run()

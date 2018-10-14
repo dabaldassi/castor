@@ -48,7 +48,7 @@ void generate(Stage * stage)
 
 int main(int argc, char *argv[])
 {
-  Game game(800,800);
+  Game game(800,800, "Super Game");
   
   game.run(generate);
   
