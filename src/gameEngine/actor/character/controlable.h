@@ -21,9 +21,13 @@ namespace actor {
   
   class Controlable : public Character
   {
+  protected:
+    int        _id;
+    bool       _keyboard;
+    static int _nb_controlable_keyboard;
   public:
     Controlable(){}
-    Controlable(std::string name, Position pos);
+    Controlable(std::string name, Position pos, bool keyboard = true);
 
     virtual void act(float dt);
     virtual void loadSprite();
@@ -33,6 +37,8 @@ namespace actor {
     virtual void saveAnnexe(std::ofstream & out);
     virtual void moveCamera();
     virtual void move(float dt = 0);
+    virtual void moveX(float dt = 0);
+    virtual void moveY(float dt = 0);
   };
 
   

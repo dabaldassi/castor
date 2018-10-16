@@ -4,7 +4,7 @@
 
 using actor::Building;
 
-Building::Building(std::string name, Position pos):Actor(name,1, pos)
+Building::Building(std::string name, Position pos):Static(name, pos)
 {
   loadSprite();
   

@@ -65,6 +65,7 @@ namespace actor {
     /** Called to draw the actor */
     virtual void update(Viewport const & vp);
 
+    virtual Position & getPosition() { return _position; }
     virtual const Position & getPosition() const { return _position; }
 
     virtual Hitbox & getHitbox()  { return _hitbox; }
@@ -82,9 +83,15 @@ namespace actor {
     virtual void addEffectStatement(std::function<void(Actor *)> fct) {_effectfct.push_back(fct);}
 
     virtual void addEffectStatement(std::function<void(Actor *, Actor *)> fct) {_effectfct2.push_back(fct);}
-
+   
     virtual void addSound(const char * path);
 
+    /**
+     *\fn virtual void playSound(unsigned int id)
+     *\brief Play the sound of the object
+     *\param id Identifier of the sound (an actor may have several sounds)
+     */
+    
     virtual void playSound(unsigned int id);
     
     /**
@@ -106,10 +113,24 @@ namespace actor {
     /**
      *\fn virtual void loadSprite(const char path[])
      *\brief Load a sprite from a path. The name of the actor + .png will add to that path.
+     *\param path The path of the sprite
      */
     
     virtual void loadSprite(const char path[]);
 
+    /**
+     *\fn virtual void loadSprite(int color[4])
+     *\brief Create a square with the size of the actor
+     *\param color The color of the square
+     */
+    
+    virtual void loadSprite(int color[4]);
+    
+    /**
+     *\fn virtual void loadSprite()
+     *\brief How to load the sprite in the object
+     */
+    
     virtual void loadSprite() = 0;
 
     /**
@@ -117,14 +138,14 @@ namespace actor {
      *\brief Save data in the actor that contain other actor
      */
     
-    virtual void saveAnnexe(std::ofstream & out){}
+    virtual void saveAnnexe(std::ofstream & out) {}
 
     /**
      *\fn virtual void loadAnnexe(std::ifstream & in)
      *\brief Load the annexe of a actor
      */
     
-    virtual void loadAnnexe(std::ifstream & in){}
+    virtual void loadAnnexe(std::ifstream & in) {}
   };
   
 }  // actor

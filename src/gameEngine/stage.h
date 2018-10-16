@@ -32,6 +32,7 @@ private:
   Viewport _vp;
   int      _objectiveEvent[NB_OBJ_EVENT];
   std::function<void(Stage *)> gen;
+  bool     _end;
 
 public:
   actor::Controlable * player; /* Some actor need to interact with the player */
@@ -52,6 +53,7 @@ public:
    * This method call the act() method for every actors managed by this stage
    * \param dt the time (in seconds) since the last call of act()
    */
+  
   void act(float dt);
 
   /** This method call the update() method for every actors */
@@ -72,6 +74,9 @@ public:
 
   /** \param actor the actor to remove from the stage */
   void remove(ActorPtr & actor);
+
+  void endStage() { _end = true; }
+  bool end() const { return _end; }
 
   /**
    *\fn void save()

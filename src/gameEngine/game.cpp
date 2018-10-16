@@ -17,7 +17,7 @@ Game::Game():stage{0,0}
 
 Game::Game(int w, int h, const char * name):stage{w,h}
 {
-  int          black[4] = {255,0,0,0};
+  int          black[4] = {0,0,0,0};
   DataWindow * dataw = (DataWindow *) malloc(sizeof(DataWindow));
 
   if(dataw)
@@ -86,7 +86,7 @@ bool run_statement(float dt)
       data->game->stage.update();
     }
   
- return true;    
+  return !data->game->stage.end();    
 }
 
 /**

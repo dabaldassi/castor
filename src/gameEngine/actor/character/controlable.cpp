@@ -10,18 +10,45 @@
 using actor::Controlable;
 using actor::Actor;
 
-Controlable::Controlable(std::string name, Position pos):Character(name, pos)
+int Controlable::_nb_controlable_keyboard = 0;
+
+Controlable::Controlable(std::string name, Position pos, bool keyboard):Character(name, pos)
 {
   loadSprite();
   
   _speed = INIT_SPEED_CONTROLABLE;
   _life = 100.f;
+  _nb_controlable_keyboard+=keyboard;
+  _keyboard = keyboard;
+  _id = _nb_controlable_keyboard;
   //_position = Position(WIDTH/2.f, HEIGHT/2.f, 100,100);
+}
+
+void Controlable::moveX(float dt)
+{
+  if(_keyboard) {
+    if(_id == 1)
+      _position.x += _speed*(ihm::Keyboard::keys[RIGHT] - ihm::Keyboard::keys[LEFT]);
+    else
+      _position.x += _speed*(ihm::Keyboard::keys[RIGHT_2] - ihm::Keyboard::keys[LEFT_2]);
+
+    _orientation = ((ihm::Keyboard::keys[RIGHT] || ihm::Keyboard::keys[RIGHT_2]) ? W : E);
+  }
+}
+
+void Controlable::moveY(float dt)
+{
+   if(_keyboard) {
+    if(_id == 1)
+      _position.y += _speed*(ihm::Keyboard::keys[FORWARD] - ihm::Keyboard::keys[BACK]);
+    else
+      _position.y += _speed*(ihm::Keyboard::keys[FORWARD_2] - ihm::Keyboard::keys[BACK_2]);
+   }
 }
 
 void Controlable::move(float dt)
 {
-  int   o[16] = {_orientation,N,S,_orientation,E,NE,SE,E,W,NW,SW,W,_orientation,N,S,_orientation};
+  int   o[16] = {_orientation,N,S,_orientation,E,NE,SW,E,W,NW,SE,W,_orientation,N,S,_orientation};
   
   _position.x += _speed * (ihm::Keyboard::keys[RIGHT] - ihm::Keyboard::keys[LEFT]);
   _position.y += _speed * (ihm::Keyboard::keys[FORWARD] - ihm::Keyboard::keys[BACK]);

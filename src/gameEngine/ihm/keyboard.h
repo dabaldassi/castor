@@ -5,7 +5,7 @@
 
 #include "../../SANDAL2/SANDAL2.h"
 
-#define NB_KEYS 10
+#define NB_KEYS 14
 #define NB_CUSTOM_KEYS 8
 #define KEY_FILE "kkb.bin"
 
@@ -19,7 +19,12 @@ typedef enum {
   MAP,
   INTERACT,
   WHEEL_UP,
-  WHEEL_DOWN
+  WHEEL_DOWN,
+  JUMP,
+  RIGHT_2,
+  LEFT_2,
+  FORWARD_2,
+  BACK_2
 }Keys;
 
 

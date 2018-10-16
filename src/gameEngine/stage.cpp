@@ -20,7 +20,7 @@ void Stage::create(size_t hash)
     std::cout << "AH" << "\n";  
 }
 
-Stage::Stage(int width, int height) : _vp{width, height}
+Stage::Stage(int width, int height) : _vp{width, height}, _end(false)
 {
   for(int i=0;i < NB_OBJ_EVENT;i++)
     _objectiveEvent[i] = 0;

@@ -10,7 +10,7 @@
 #include <iostream>
 #include <fstream>
 
-typedef enum { N, NE, NW, E, W, SW, SE, S} Orientation;
+typedef enum { N, NE, NW, E, W, SE, SW, S} Orientation;
 
 /**
  *\struct Position

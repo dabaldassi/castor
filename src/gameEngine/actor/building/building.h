@@ -8,7 +8,7 @@
 #ifndef BUILDING_H
 #define BUILDING_H
 
-#include "../actor.h"
+#include "../static.h"
 
 namespace actor {
 
@@ -17,7 +17,7 @@ namespace actor {
    *\brief Building on the map
    */
   
-  class Building : public Actor
+  class Building : public Static
   {
   protected:
     Position _trigger; /* Position where you can enter the building */

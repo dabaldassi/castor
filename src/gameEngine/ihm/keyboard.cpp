@@ -22,6 +22,11 @@ void Keyboard::init()
   binding[MAP]        = SDLK_m;
   binding[INTERACT]   = SDLK_z;
   binding[ATTACK]     = SDL_BUTTON_LEFT;
+  binding[JUMP]       = SDLK_SPACE;
+  binding[RIGHT_2]    = SDLK_RIGHT;
+  binding[LEFT_2]     = SDLK_LEFT;
+  binding[FORWARD_2]  = SDLK_UP;
+  binding[BACK_2]     = SDLK_DOWN;
 
   /* Set function that will be called when an event occured */
 

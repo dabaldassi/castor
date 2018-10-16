@@ -33,3 +33,10 @@ target_link_libraries(game
   ${CMAKE_PROJECT_NAME}
   )
 
+
+file(GLOB_RECURSE pong_sources src/pong/*.cpp)
+add_executable(pong ${pong_sources})
+target_link_libraries(pong
+  sandal2
+  ${CMAKE_PROJECT_NAME}
+  )
