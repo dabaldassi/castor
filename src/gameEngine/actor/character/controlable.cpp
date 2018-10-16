@@ -32,7 +32,7 @@ void Controlable::moveX(float dt)
     else
       _position.x += _speed*(ihm::Keyboard::keys[RIGHT_2] - ihm::Keyboard::keys[LEFT_2]);
 
-    _orientation = ((ihm::Keyboard::keys[RIGHT] || ihm::Keyboard::keys[RIGHT_2]) ? W : E);
+    _orientation = ((ihm::Keyboard::keys[RIGHT] || ihm::Keyboard::keys[RIGHT_2]) ? E : W);
   }
 }
 
@@ -43,12 +43,14 @@ void Controlable::moveY(float dt)
       _position.y += _speed*(ihm::Keyboard::keys[FORWARD] - ihm::Keyboard::keys[BACK]);
     else
       _position.y += _speed*(ihm::Keyboard::keys[FORWARD_2] - ihm::Keyboard::keys[BACK_2]);
+
+    _orientation = ((ihm::Keyboard::keys[FORWARD] || ihm::Keyboard::keys[FORWARD_2]) ? N : S);
    }
 }
 
 void Controlable::move(float dt)
 {
-  int   o[16] = {_orientation,N,S,_orientation,E,NE,SW,E,W,NW,SE,W,_orientation,N,S,_orientation};
+  int   o[16] = {_orientation,N,S,_orientation,W,NE,SW,W,E,NW,SE,E,_orientation,N,S,_orientation};
   
   _position.x += _speed * (ihm::Keyboard::keys[RIGHT] - ihm::Keyboard::keys[LEFT]);
   _position.y += _speed * (ihm::Keyboard::keys[FORWARD] - ihm::Keyboard::keys[BACK]);
