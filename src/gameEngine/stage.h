@@ -1,11 +1,11 @@
+#ifndef STAGE_H
+#define STAGE_H
+
 /**
  *\file stage.h
  *\author dabaldassi
  *\date 07/2018
  */
-
-#ifndef STAGE_H
-#define STAGE_H
 
 #include <memory>
 #include <list>
@@ -50,32 +50,65 @@ public:
   Actors       & actors()       { return _actors; }
 
   /** 
-   * This method call the act() method for every actors managed by this stage
-   * \param dt the time (in seconds) since the last call of act()
+   *\fn void act(float dt)
+   *\brief This method call the act() method for every actors managed by this stage
+   *\param dt the time (in miliseconds) since the last call of act()
    */
   
   void act(float dt);
 
-  /** This method call the update() method for every actors */
+  /** 
+   *\fn void update()
+   *\brief This method call the update() method for every actors 
+   */
   void update() { for (auto & a : _actors) a->update(_vp); }
 
   /**
-   * Construct inplace an actor and return a referecence to it
-   * \param args parameters of the constructor of the actor type
-   * \return the instance of the actor created
+   *\fn template <class A, class... Args>
+   A & create(Args &&... args);
+   *\brief Construct inplace an actor and return a referecence to it
+   *\param args parameters of the constructor of the actor type
+   *\return the instance of the actor created
    */
   template <class A, class... Args>
   A & create(Args &&... args);
 
+  /**
+   *\fn void create(size_t hash)
+   *\brief Create an actor from the hash of his class
+   *\param hash Hash of the class (you can get it with typeid )
+   */
+  
   void create(size_t hash);
 
-  /** \param actor the actor to add to this stage */
+  /**
+   *\fn void add(ActorPtr && actor)
+   *\brief Add an acotr to this stage
+   *\param actor the actor to add to this stage 
+  */
+  
   void add(ActorPtr && actor) { actor->setStage(this); _actors.push_back(std::move(actor)); }
 
-  /** \param actor the actor to remove from the stage */
+  /**
+   *\fn void remove(ActorPtr & actor)
+   *\brief Remove an actor from this stage
+   *\param actor the actor to remove from the stage 
+   */
+  
   void remove(ActorPtr & actor);
 
+  /**
+   *\fn void endStage()
+   *\brief Set the stage to be ended
+   */
+  
   void endStage() { _end = true; }
+
+  /**
+   *\fn bool end()
+   *\brief Tell if the stage must be ended
+   */
+  
   bool end() const { return _end; }
 
   /**

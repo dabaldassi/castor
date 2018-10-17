@@ -1,6 +1,5 @@
 #include "item.h"
 #include "../../stage.h"
-#include "../character/controlable.h"
 
 using actor::Item;
 

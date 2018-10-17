@@ -32,6 +32,8 @@ private:
 
 public:
   Stage stage;
+
+  /* Display of the game */
   
   static constexpr int GAME_D = 0;
   static constexpr int PAUSE_D = 1;
@@ -40,11 +42,19 @@ public:
   static constexpr int KB_D = 3;
   
   Game();
+
+  /**
+   *\param w Width of the window
+   *\param h Height of the window
+   *\param name Name of the window
+   */
+  
   Game(int w, int h, const char * name);
 
   /**
    *\fn void run()
    *\brief Set the game in run mode 
+   *\param generate Function to generate the stage. If you don't send one, it will call the generation by default. If you had already set one and call run again without the function, it will call the last function you added.
    */
   void run(std::function<void (Stage *)> generate = nullptr);
 

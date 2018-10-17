@@ -1,6 +1,6 @@
 #include "building.h"
 #include "../../stage.h"
-#include "../character/controlable.h"
+#include "../controlable/controlable.h"
 
 using actor::Building;
 
