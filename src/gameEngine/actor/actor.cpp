@@ -100,7 +100,7 @@ void Actor::loadSprite(const char path[])
 
   if(_elem) delElement(_elem);
   
-  _elem = createImage(_position.x, _position.y, _position.w, _position.h, (path + _name + ".png").c_str(), 0, 0);
+  _elem = createImage(_position.x, _position.y, _position.w, _position.h, path, 0, 0);
   
   if(_elem == NULL) // Default
     _elem = createBlock(_position.x, _position.y, _position.w, _position.h, green, 0, 0);
