@@ -4,7 +4,7 @@
 
 #include "stage.h"
 
-#include "actor/character/controlable.h"
+#include "actor/controlable/controlable.h"
 
 #include "actor/objectives/objective.h"
 

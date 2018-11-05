@@ -38,7 +38,7 @@ namespace actor {
     int         _orientation;
     Hitbox      _hitbox;
     
-    std::vector<Mix_Music *> _sounds;
+    std::vector<Mix_Chunk *> _sounds;
       
     std::vector<std::function<void(Actor *, float)>>   _actfct;
     std::vector<std::function<void(Actor *)>>          _effectfct;
@@ -92,7 +92,7 @@ namespace actor {
      *\param id Identifier of the sound (an actor may have several sounds)
      */
     
-    virtual void playSound(unsigned int id);
+    virtual void playSound(unsigned int id, int ch = -1);
     
     /**
      *\fn virtual void save(std::ofstream & out)

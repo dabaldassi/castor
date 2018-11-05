@@ -11,7 +11,9 @@ You need SANDAL2 ( and SDL2 ) to compile it.
 ```
 >cd castor
 
->git submodule add git@github.com:dabaldassi/SANDAL2.git src/SANDAL2
+>git submodule init src/SANDAL2
+
+>git submodule update src/SANDAL2
 
 >mkdir build
 

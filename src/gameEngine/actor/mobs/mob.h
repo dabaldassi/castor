@@ -19,7 +19,7 @@ namespace actor {
 
   class Mob : public Moveable
   {
-  private:
+  protected:
     float _time;
     int   _distance;
     int   _waitingTime;

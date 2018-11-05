@@ -6,7 +6,7 @@
 
 #include "gameEngine/actor/mobs/mob.h"
 
-#include "gameEngine/actor/character/controlable.h"
+#include "gameEngine/actor/controlable/controlable.h"
 
 
 void move(actor::Actor * c, float dt)
@@ -36,7 +36,7 @@ void generate(Stage * stage)
 
   getDimensionWindow(&w, &h);
   
-  stage->player = &(stage->create<actor::Controlable>("Jack", Position(w/2, h/2, 100,100))); // Create an actor controlable
+  stage->player = &(stage->create<actor::Controlable>("Jack", 1, Position(w/2, h/2, 100,100))); // Create an actor controlable
   stage->player->addActStatement(move); // Add a statement to the actor
   stage->player->addEffectStatement(effect);
   stage->player->addSound("../sound/hit.wav");

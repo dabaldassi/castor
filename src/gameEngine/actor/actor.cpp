@@ -52,7 +52,7 @@ Actor::~Actor()
     }
 
   for (unsigned int i = 0; i < _sounds.size(); i++) {
-    Mix_FreeMusic(_sounds[i]);
+    Mix_FreeChunk(_sounds[i]);
   }
 }
 
@@ -100,7 +100,7 @@ void Actor::loadSprite(const char path[])
 
   if(_elem) delElement(_elem);
   
-  _elem = createImage(_position.x, _position.y, _position.w, _position.h, (path + _name + ".png").c_str(), 0, 0);
+  _elem = createImage(_position.x, _position.y, _position.w, _position.h, path, 0, 0);
   
   if(_elem == NULL) // Default
     _elem = createBlock(_position.x, _position.y, _position.w, _position.h, green, 0, 0);
@@ -115,9 +115,9 @@ void Actor::loadSprite(int color[4])
 
 void Actor::addSound(const char *path)
 {
-  Mix_Music * sound;
+  Mix_Chunk * sound;
 
-  sound = Mix_LoadMUS(path);
+  sound = Mix_LoadWAV(path);
 
   if(sound) {
     _sounds.push_back(sound);
@@ -126,9 +126,9 @@ void Actor::addSound(const char *path)
     std::cerr << "Failed to open : " << path << "\n";
 }
 
-void Actor::playSound(unsigned int id)
+void Actor::playSound(unsigned int id, int ch)
 {
   if(id < _sounds.size()) {
-    Mix_PlayMusic(_sounds[id], 0);
+    Mix_PlayChannel(id,_sounds[id], 0);
   }
 }

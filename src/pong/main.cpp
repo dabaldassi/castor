@@ -1,6 +1,5 @@
-
 #include "gameEngine/game.h"
-#include "gameEngine/actor/character/controlable.h"
+#include "gameEngine/actor/controlable/controlable.h"
 #include "gameEngine/ihm/color.h"
 #include "gameEngine/ihm/keyboard.h"
 #include "gameEngine/actor/static.h"
@@ -25,11 +24,11 @@ void generate(Stage * s)
   
   getDimensionWindow(&w, &h); // Get the width and the height of the window
   
-  a = &s->create<actor::Controlable>("Player1", Position(w/2.f,12, 100, 10)); // Create an actor controlable
+  a = &s->create<actor::Controlable>("Player1", 1, Position(w/2.f,12, 100, 10)); // Create an actor controlable
   a->loadSprite(Color::white); // Load a white rectangle
   a->addActStatement(move1); // Add a new statement to the actor
 
-  a = &s->create<actor::Controlable>("Player2", Position(w/2.f,h - 2,100,10)); // Create player 2
+  a = &s->create<actor::Controlable>("Player2", 1, Position(w/2.f,h - 2,100,10)); // Create player 2
   a->loadSprite(Color::white);
   a->addActStatement(move2);
 

@@ -12,16 +12,14 @@ using actor::Actor;
 
 int Controlable::_nb_controlable_keyboard = 0;
 
-Controlable::Controlable(std::string name, Position pos, bool keyboard):Character(name, pos)
+Controlable::Controlable(std::string name, float life, Position pos, bool keyboard):Moveable(name,life, pos)
 {
   loadSprite();
   
   _speed = INIT_SPEED_CONTROLABLE;
-  _life = 100.f;
   _nb_controlable_keyboard+=keyboard;
   _keyboard = keyboard;
   _id = _nb_controlable_keyboard;
-  //_position = Position(WIDTH/2.f, HEIGHT/2.f, 100,100);
 }
 
 void Controlable::moveX(float dt)
@@ -95,7 +93,7 @@ void Controlable::save(std::ofstream &out)
 {
   if(out.is_open())
     {
-      Character::save(out);
+      Moveable::save(out);
       
       out.write((char *)&_speed, sizeof(float));
     }
@@ -105,7 +103,7 @@ void Controlable::load(std::ifstream &in)
 {
   if(in.is_open())
     {
-      Character::load(in);
+      Moveable::load(in);
       
       in.read((char *)&_speed, sizeof(float));
     }
