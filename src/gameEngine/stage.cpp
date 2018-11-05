@@ -33,6 +33,11 @@ void Stage::remove(ActorPtr & actor)
   _actors.erase(it);
 }
 
+Stage::~Stage()
+{
+  clearMusic();
+}
+
 void Stage::act(float dt)
 {
   ActorPtr * toDelete(nullptr);
@@ -122,4 +127,43 @@ int Stage::getObjEvent(int event)
   _objectiveEvent[event] = 0;
 
   return ret;
+}
+
+void Stage::addMusic(const char *name)
+{
+  Mix_Music * music = Mix_LoadMUS(name);
+
+  if(music) {
+    _music.push_back(music);
+  }
+  else
+    std::cerr << "Failed to load " << name << "\n";
+}
+
+void Stage::playMusic(unsigned int id)
+{
+  if(id < _music.size()) {
+    Mix_PlayMusic(_music[id], -1);
+  }
+}
+
+void Stage::removeMusic(unsigned int id)
+{
+  if(id < _music.size()) {
+    Mix_FreeMusic(_music[id]);
+    _music.erase(_music.begin()+id);
+  }
+}
+
+void Stage::clearMusic()
+{
+  std::for_each(_music.begin(), _music.end(), Mix_FreeMusic);
+  _music.clear();
+}
+
+void Stage::stopMusic()
+{
+  if(!Mix_PlayingMusic()) {
+    Mix_PauseMusic();
+  }
 }

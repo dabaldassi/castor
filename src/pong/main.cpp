@@ -36,6 +36,9 @@ void generate(Stage * s)
   s->create<actor::Static>("Wall", Position(w,h,10,h)); // Create a second wall
   
   s->create<actor::Ball>("Ball", Position(w/2,h/2,10,10));
+
+  s->addMusic("../sound/music.wav"); // Load the level music
+  s->playMusic(0); // Play the music
 }
 
 int main()

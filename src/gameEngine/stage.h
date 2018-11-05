@@ -33,6 +33,7 @@ private:
   int      _objectiveEvent[NB_OBJ_EVENT];
   std::function<void(Stage *)> gen;
   bool     _end;
+  std::vector<Mix_Music *> _music;
 
 public:
   actor::Controlable * player; /* Some actor need to interact with the player */
@@ -48,6 +49,8 @@ public:
 
   Actors const & actors() const { return _actors; }
   Actors       & actors()       { return _actors; }
+
+  virtual ~Stage();
 
   /** 
    *\fn void act(float dt)
@@ -89,6 +92,16 @@ public:
   
   void add(ActorPtr && actor) { actor->setStage(this); _actors.push_back(std::move(actor)); }
 
+  void addMusic(const char * name);
+
+  void playMusic(unsigned int id);
+
+  void stopMusic();
+
+  void removeMusic(unsigned int id);
+
+  void clearMusic();
+  
   /**
    *\fn void remove(ActorPtr & actor)
    *\brief Remove an actor from this stage
