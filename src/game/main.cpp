@@ -22,7 +22,7 @@ void effect(actor::Actor * c, actor::Actor * c2)
   std::cout << c->getName() << ": salut" << "\n";
 
   c->playSound(0);
-  
+  std::cout << c->getData<int>() << "\n";
 }
 
 void effectCow(actor::Actor *c, actor::Actor * c2)
@@ -40,9 +40,11 @@ void generate(Stage * stage)
   stage->player->addActStatement(move); // Add a statement to the actor
   stage->player->addEffectStatement(effect);
   stage->player->addSound("../sound/hit.wav");
+  stage->player->setData<int>(8);
   
   stage->create<actor::Mob>("cow", 10, Position(0,0,233,170)).addEffectStatement(effectCow); // Create a mob
-  stage->create<actor::Building>("bloc", Position(200, 200, 100, 100)); // Create o bloc
+  stage->create<actor::Building>("bloc", Position(200, 200, 100, 100)); // Create a bloc
+  
 }
 
 

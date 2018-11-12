@@ -22,11 +22,22 @@ class Stage;
 
 namespace actor {
 
+  class Actor;
+
+  template <class A, typename D>
+  struct Data
+  {
+    A actor;
+    D data;
+
+    static void free(void * e) { delete (Data *) e; }
+  };
+  
   /**
    *\class Actor
    *\brief Mother class of all the actors of the game
    */
-  
+
   class Actor
   {
   protected:
@@ -146,7 +157,38 @@ namespace actor {
      */
     
     virtual void loadAnnexe(std::ifstream & in) {}
+
+    template<typename D>
+    void setData(const D & data);
+
+    template<typename D>
+    D & getData() const;
   };
+
+  template<typename D>
+  void Actor::setData(const D & data)
+  {
+    Data<decltype(this), D> * d = new Data<decltype(this), D>;
+
+    d->actor = this;
+    d->data = data;
+
+    if(_elem) {
+      setDataElement(_elem, (void *)d);
+      setFreeDataElement(_elem, Data<decltype(this), D>::free);
+    }
+    
+  }
+
+  template<typename D>
+  D & Actor::getData() const
+  {
+    Data<decltype(this), D> * d;
+
+    getDataElement(_elem, (void **)&d);
+
+    return d->data;
+  }
   
 }  // actor
 

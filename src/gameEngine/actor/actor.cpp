@@ -54,6 +54,7 @@ Actor::~Actor()
   for (unsigned int i = 0; i < _sounds.size(); i++) {
     Mix_FreeChunk(_sounds[i]);
   }
+
 }
 
 void Actor::save(std::ofstream &out)
