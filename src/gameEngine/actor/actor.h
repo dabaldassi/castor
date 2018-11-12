@@ -23,15 +23,26 @@ class Stage;
 namespace actor {
 
   class Actor;
-
-  template <class A, typename D>
-  struct Data
+  
+  class Data
   {
-    A actor;
-    D data;
+    Actor * _actor;
+   
+  public:
+    void setActor(Actor * actor);
 
+    template<class Actor=Actor *>
+    Actor getActor() { return dynamic_cast<Actor>(_actor);}
+    
+    /**
+     *\brief The method to set the data free
+     */
     static void free(void * e) { delete (Data *) e; }
+
+    virtual ~Data() {}
   };
+
+
   
   /**
    *\class Actor
@@ -56,13 +67,13 @@ namespace actor {
     std::vector<std::function<void(Actor *, Actor *)>> _effectfct2;
     
   public:
+    std::function<void(Actor *, int)> onClick;
+    
     Actor();
 
-    Actor(std::string name, float life)
-      :_elem(nullptr), _life(life), _name(name) {}
+    Actor(std::string name, float life);
     
-    Actor(std::string name, float life, Position pos)
-      :_position(pos),_elem(nullptr), _life(life), _name(name), _hitbox(&_position) { _orientation = N; }
+    Actor(std::string name, float life, Position pos);
     
     virtual ~Actor();
 
@@ -94,6 +105,8 @@ namespace actor {
     virtual void addEffectStatement(std::function<void(Actor *)> fct) {_effectfct.push_back(fct);}
 
     virtual void addEffectStatement(std::function<void(Actor *, Actor *)> fct) {_effectfct2.push_back(fct);}
+
+    virtual void addOnClickEvent(std::function<void(Actor *, int)> fct);
    
     virtual void addSound(const char * path);
 
@@ -158,38 +171,36 @@ namespace actor {
     
     virtual void loadAnnexe(std::ifstream & in) {}
 
-    template<typename D>
-    void setData(const D & data);
+    /**
+     *\fn virtual void setData(const D & data)
+     *\brief Set a data to your actor
+     *\param data A data of type Data or inheritance. Need to allocate with new (for now).
+     */
+    
+    void setData(Data * data);
 
-    template<typename D>
-    D & getData() const;
+    /**
+     *\fn virtual void getData()
+     *\brief Get your data back
+     */
+
+    template<class Data=Data *>
+    Data getData() const;
+   
   };
 
-  template<typename D>
-  void Actor::setData(const D & data)
+  template<class Data=Data *>
+
+  Data Actor::getData() const
   {
-    Data<decltype(this), D> * d = new Data<decltype(this), D>;
-
-    d->actor = this;
-    d->data = data;
-
-    if(_elem) {
-      setDataElement(_elem, (void *)d);
-      setFreeDataElement(_elem, Data<decltype(this), D>::free);
-    }
-    
-  }
-
-  template<typename D>
-  D & Actor::getData() const
-  {
-    Data<decltype(this), D> * d;
+    Data d;
 
     getDataElement(_elem, (void **)&d);
 
-    return d->data;
+    return d;
   }
-  
+
+ 
 }  // actor
 
 #endif /* ACTOR_H */

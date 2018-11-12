@@ -2,6 +2,7 @@
 #include "actor.h"
 
 using actor::Actor;
+using actor::Data;
 
 void Actor::update(Viewport const & vp)
 {
@@ -35,12 +36,34 @@ void Actor::effect(Actor * actor)
     a(this, actor);
 }
 
+void click(Element * e, int b)
+{
+  Data * data;
+  getDataElement(e, (void **)&data);
+
+  std::cout << "coucou" << "\n";
+  
+  if(data->getActor()->onClick)
+    data->getActor()->onClick(data->getActor(), b);
+}
+
 Actor::Actor()
 {
   _elem = NULL;
   _life = 0;
   _position = Position(0,0,0,0);
   _position.use = false;
+  onClick = NULL;
+}
+
+Actor::Actor(std::string name, float life):_elem(nullptr), _life(life), _name(name)
+{
+  onClick = NULL;
+}
+
+Actor::Actor(std::string name, float life, Position pos) :_position(pos),_elem(nullptr), _life(life), _name(name), _hitbox(&_position)
+{
+  onClick = NULL;
 }
 
 Actor::~Actor()
@@ -54,7 +77,6 @@ Actor::~Actor()
   for (unsigned int i = 0; i < _sounds.size(); i++) {
     Mix_FreeChunk(_sounds[i]);
   }
-
 }
 
 void Actor::save(std::ofstream &out)
@@ -132,4 +154,31 @@ void Actor::playSound(unsigned int id, int ch)
   if(id < _sounds.size()) {
     Mix_PlayChannel(id,_sounds[id], 0);
   }
+}
+
+void Actor::setData(Data * data)
+{
+  Data * tmp;
+  
+  getDataElement(_elem, (void **)&tmp);
+
+  if(tmp)
+    Data::free(tmp);
+    
+  data->setActor(this);
+  
+  setDataElement(_elem, (void *)data);
+  setFreeDataElement(_elem, Data::free);
+}
+
+void Data::setActor(Actor * actor)
+{
+  _actor = actor;
+}
+
+void Actor::addOnClickEvent(std::function<void(Actor *, int)> fct)
+{
+  onClick = fct;
+  setOnClickElement(_elem, click);
+  addClickableElement(_elem, rectangleClickable(0.f, 0.f, 1.f, 1.f), 0);
 }
