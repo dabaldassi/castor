@@ -86,7 +86,7 @@ void Controlable::moveCamera()
 
 void Controlable::loadSprite()
 {
-  _elem = createBlock(_position.x - (_position.w/2), _position.y - _position.h/2, 100, 100, Color::blue, 0, 0);
+  Actor::loadSprite(Color::blue);
 }
 
 void Controlable::save(std::ofstream &out)

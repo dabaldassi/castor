@@ -2,11 +2,13 @@
 
 #include "gameEngine/game.h"
 
-#include "gameEngine/actor/building/building.h"
+#include "gameEngine/actor/static.h"
 
 #include "gameEngine/actor/mobs/mob.h"
 
 #include "gameEngine/actor/controlable/controlable.h"
+
+#include "gameEngine/ihm/color.h"
 
 
 class DataPlayer : public actor::Data
@@ -45,6 +47,8 @@ void generate(Stage * stage)
 {
   DataPlayer * data = new DataPlayer;
   int w,h;
+  actor::Actor * a;
+  
 
   data->a = 8;
 
@@ -58,8 +62,11 @@ void generate(Stage * stage)
   stage->player->setData(data);
   
   stage->create<actor::Mob>("cow", 10, Position(0,0,233,170)).addEffectStatement(effectCow); // Create a mob
-  stage->create<actor::Building>("bloc", Position(200, 200, 100, 100)); // Create a bloc
-  
+  a = &stage->create<actor::Static>("bloc", Position(200, 200, 100, 100)); // Create a bloc
+  a->loadSprite(Color::green);
+
+  //a = &stage->create<actor::Static>("bloc", Position(0, 0, 100, 100)); // Create a bloc
+  //a->loadSprite(Color::green);
 }
 
 

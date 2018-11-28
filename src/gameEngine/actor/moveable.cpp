@@ -5,11 +5,6 @@
 
 using actor::Moveable;
 
-void Moveable::update(Viewport const & vp)
-{
-  Actor::update(vp);
-}
-
 void Moveable::save(std::ofstream &out)
 {
   Actor::save(out);

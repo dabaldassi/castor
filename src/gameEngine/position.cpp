@@ -2,7 +2,7 @@
 
 bool Position::collide(const Position & p) const
 {
-  return (p.x + p.w >= x && p.x <= x + w) && (p.y - p.h <= y && p.y >= y - h);
+  return (p.x + p.w >= x && p.x <= x + w) && (p.y + p.h >= y && p.y <= y + h);
 }
 
 void Position::save(std::ofstream &out)

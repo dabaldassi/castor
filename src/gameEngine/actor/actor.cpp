@@ -1,5 +1,6 @@
 #include "../../SANDAL2/SANDAL2.h"
 #include "actor.h"
+#include <iostream>
 
 using actor::Actor;
 using actor::Data;
@@ -11,8 +12,8 @@ void Actor::update(Viewport const & vp)
   if (_elem)
     {
       Position pos = _position;
-
-      replaceElement(_elem, mToP * (pos.x - vp.x), mToP * (vp.height - pos.y + vp.y));
+      
+      replaceElement(_elem, mToP * (pos.x - vp.x), mToP * (vp.height - pos.h -pos.y + vp.y));
       setDimensionElement(_elem, mToP * pos.w, mToP * pos.h);
     }
 }

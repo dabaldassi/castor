@@ -20,10 +20,10 @@ void correctPosition(Position & _position, int orientation, float speed,const Po
   switch(orientation)
     {
     case N:
-      _position.y += (posObj.use)?(posObj.y - posObj.h) - _position.y:-b;
+      _position.y += (posObj.use)?(posObj.y) - _position.y - _position.h:-b;
       break;
     case S:
-      _position.y += (posObj.use)?posObj.y - (_position.y - _position.h):b;
+      _position.y += (posObj.use)?posObj.y+posObj.h - (_position.y):b;
       break;
     case W:
       _position.x += (posObj.use)?(posObj.x + posObj.w) - _position.x:b;
@@ -32,19 +32,19 @@ void correctPosition(Position & _position, int orientation, float speed,const Po
       _position.x += (posObj.use)?posObj.x - (_position.w + _position.x):-b;
       break;
     case NE:
-      _position.y += (posObj.use)?(posObj.y - posObj.h) - _position.y:-b/2;
+      _position.y += (posObj.use)?(posObj.y) - _position.y - _position.h:-b/2;
       _position.x += (posObj.use)?(posObj.x + posObj.w) - _position.x:b/2;
       break;
     case NW:
-      _position.y += (posObj.use)?(posObj.y - posObj.h) - _position.y:-b/2;
+      _position.y += (posObj.use)?(posObj.y) - _position.y - _position.h:-b/2;
       _position.x += (posObj.use)?posObj.x - (_position.w + _position.x):-b/2;
       break;
     case SE:
-      _position.y += (posObj.use)?posObj.y - (_position.y - _position.h):b/2;
+      _position.y += (posObj.use)?posObj.y+posObj.h - (_position.y):b/2;
       _position.x += (posObj.use)?posObj.x - (_position.w + _position.x):-b/2;
       break;
     case SW:
-      _position.y += (posObj.use)?posObj.y - (_position.y - _position.h):b/2;
+      _position.y += (posObj.use)?posObj.y+posObj.h - (_position.y):b/2;
       _position.x += (posObj.use)?(posObj.x + posObj.w) - _position.x:b/2;
       break;
     }

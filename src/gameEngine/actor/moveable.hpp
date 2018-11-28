@@ -19,7 +19,7 @@ namespace actor {
       Actor(name, life, p) {}
 
     //virtual void act(float dt) = 0;
-    virtual void update(Viewport const & vp);
+    //virtual void update(Viewport const & vp);
     virtual void load(std::ifstream & in);
     virtual void save(std::ofstream & out);
     virtual void loadSprite(const char path[]);
