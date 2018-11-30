@@ -1,6 +1,7 @@
 #include <algorithm>
 #include <fstream>
 #include <iostream>
+#include <Box2D/Common/b2Math.h>
 
 #include "stage.h"
 
@@ -9,6 +10,13 @@
 #include "actor/objectives/objective.h"
 
 #include "actor/mobs/mob.h"
+
+b2World & Stage::world()
+{
+  static b2World w(b2Vec2(0.f, -10.f));
+
+  return w;
+}
 
 void Stage::create(size_t hash)
 {  
@@ -24,6 +32,8 @@ Stage::Stage(int width, int height) : _vp{width, height}, _end(false)
 {
   for(int i=0;i < NB_OBJ_EVENT;i++)
     _objectiveEvent[i] = 0;
+
+  //_world(b2Vec2(0.f,0.f));
 }
 
 void Stage::remove(ActorPtr & actor) 

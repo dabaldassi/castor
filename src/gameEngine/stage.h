@@ -9,11 +9,14 @@
 
 #include <memory>
 #include <list>
+#include <Box2D/Dynamics/b2World.h>
 #include "actor/actor.h"
 #include "viewport.h"
 
 #define FILE_SAVE "save.bin"
 #define NB_OBJ_EVENT 1
+
+class b2World;
 
 namespace actor {
 
@@ -28,13 +31,13 @@ struct Stage {
   using Actors = std::list<ActorPtr>;
 
 private:
-  Actors   _actors;
-  Viewport _vp;
-  int      _objectiveEvent[NB_OBJ_EVENT];
+  Actors                       _actors;
+  Viewport                     _vp;
+  int                          _objectiveEvent[NB_OBJ_EVENT];
   std::function<void(Stage *)> gen;
-  bool     _end;
-  std::vector<Mix_Music *> _music;
-
+  bool                         _end;
+  std::vector<Mix_Music *>     _music;
+  
 public:
   actor::Controlable * player; /* Some actor need to interact with the player */
   
@@ -43,6 +46,8 @@ public:
    * \param height the height of the windows
    */
   Stage(int width, int height);
+
+  static b2World & world();
 
   Viewport       & viewport()       { return _vp; }
   Viewport const & viewport() const { return _vp; }

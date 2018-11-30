@@ -11,6 +11,7 @@
 #include <iosfwd>
 #include <functional>
 #include <SDL2/SDL_mixer.h>
+#include <Box2D/Dynamics/b2Body.h>
 
 #include "../viewport.h"
 
@@ -27,7 +28,7 @@ namespace actor {
   class Data
   {
     Actor * _actor;
-   
+    
   public:
     void setActor(Actor * actor);
 
@@ -59,6 +60,7 @@ namespace actor {
     std::string _name;
     int         _orientation;
     Hitbox      _hitbox;
+    b2Body   *  _body;
     
     std::vector<Mix_Chunk *> _sounds;
       
@@ -71,9 +73,9 @@ namespace actor {
     
     Actor();
 
-    Actor(std::string name, float life);
+    Actor(const std::string & name, float life);
     
-    Actor(std::string name, float life, Position pos);
+    Actor(const std::string & name, float life, const Position & pos);
     
     virtual ~Actor();
 

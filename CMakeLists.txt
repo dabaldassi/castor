@@ -10,6 +10,7 @@ if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
 endif()
 
 find_package(SDL2 REQUIRED)
+find_package(Box2D REQUIRED)
 
 include_directories(src ${SDL2_INCLUDE_DIRS})
 
@@ -26,6 +27,7 @@ file(GLOB_RECURSE castor_sources src/gameEngine/*.cpp)
 add_library( castor ${castor_sources})
 target_link_libraries(castor
   sandal2
+  ${BOX2D_LIBRARIES}
   )
 
 file(GLOB_RECURSE game_sources src/game/*.cpp)
@@ -33,6 +35,7 @@ add_executable( game ${game_sources})
 target_link_libraries(game
   sandal2
   castor
+  ${BOX2D_LIBRARIES}
   )
 
 
@@ -41,4 +44,5 @@ add_executable(pong ${pong_sources})
 target_link_libraries(pong
   sandal2
   castor
+  ${BOX2D_LIBRARIES}
   )

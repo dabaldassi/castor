@@ -1,6 +1,8 @@
 #include "../../SANDAL2/SANDAL2.h"
 #include "actor.h"
+#include "../stage.h"
 #include <iostream>
+#include <Box2D/Box2D.h>
 
 using actor::Actor;
 using actor::Data;
@@ -11,10 +13,10 @@ void Actor::update(Viewport const & vp)
 
   if (_elem)
     {
-      Position pos = _position;
+      b2Vec2 pos = _body->GetPosition();
       
-      replaceElement(_elem, mToP * (pos.x - vp.x), mToP * (vp.height - pos.h -pos.y + vp.y));
-      setDimensionElement(_elem, mToP * pos.w, mToP * pos.h);
+      replaceElement(_elem, mToP * (pos.x - vp.x), mToP * (vp.height - _position.h -pos.y + vp.y));
+      setDimensionElement(_elem, mToP * _position.w, mToP * _position.h);
     }
 }
 
@@ -41,8 +43,6 @@ void click(Element * e, int b)
 {
   Data * data;
   getDataElement(e, (void **)&data);
-
-  std::cout << "coucou" << "\n";
   
   if(data->getActor()->onClick)
     data->getActor()->onClick(data->getActor(), b);
@@ -57,13 +57,29 @@ Actor::Actor()
   onClick = NULL;
 }
 
-Actor::Actor(std::string name, float life):_elem(nullptr), _life(life), _name(name)
+Actor::Actor(const std::string & name, float life):_elem(nullptr), _life(life), _name(name)
 {
   onClick = NULL;
 }
 
-Actor::Actor(std::string name, float life, Position pos) :_position(pos),_elem(nullptr), _life(life), _name(name), _hitbox(&_position)
+Actor::Actor(const std::string & name, float life, const Position & pos) :_position(pos),_elem(nullptr), _life(life), _name(name), _hitbox(&_position)
 {
+  b2BodyDef bodyDef;
+  bodyDef.type = b2_dynamicBody;
+  bodyDef.position.Set(pos.x, pos.y);
+  _body = Stage::world().CreateBody(&bodyDef);
+
+  
+  b2PolygonShape dynamicBox;
+  dynamicBox.SetAsBox(pos.w/2.f, pos.h/2.f);
+
+  b2FixtureDef fixtureDef;
+  fixtureDef.shape = &dynamicBox;
+  fixtureDef.density = 1.0f;
+  fixtureDef.friction = 0.3f;
+
+  _body->CreateFixture(&fixtureDef);
+  
   onClick = NULL;
 }
 

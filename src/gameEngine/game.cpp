@@ -196,6 +196,8 @@ void Game::event_manager(bool (*statement)(float))
       run = !PollEvent(NULL);
       
       getDataWindow((void **)&dataw);
+
+      Stage::world().Step(dt, 10, 3);
       
       run = run && dataw->param;
       dataw->param = (run)?dataw->param:0;

@@ -81,7 +81,7 @@ void Controlable::moveCamera()
   getDimensionWindow(&w, &h);
   getCoordElement(_elem, &x, &y);
   _stage->viewport().x += ((x+_position.w/2) - w/2 )*0.1;
-  _stage->viewport().y += ( h/2 - (y+_position.h/2))*0.1;
+  _stage->viewport().y += ( h/2 - (y+_position.h/2))*0.01;
 }
 
 void Controlable::loadSprite()
