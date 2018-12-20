@@ -13,8 +13,8 @@
 
 b2World & Stage::world()
 {
-  static b2World w(b2Vec2(0.f, -10.f));
-
+  static b2World w(b2Vec2(0.f, 0.f));
+  
   return w;
 }
 
@@ -32,8 +32,7 @@ Stage::Stage(int width, int height) : _vp{width, height}, _end(false)
 {
   for(int i=0;i < NB_OBJ_EVENT;i++)
     _objectiveEvent[i] = 0;
-
-  //_world(b2Vec2(0.f,0.f));
+  
 }
 
 void Stage::remove(ActorPtr & actor) 

@@ -9,9 +9,8 @@ namespace actor {
   {
   public:
     Static(){}
-    Static(std::string name, Position pos)
-      :Actor(name, 1, pos) { loadSprite(); }
-    
+    Static(const std::string & name, const Position & pos);
+      
     virtual void loadSprite();
   
     virtual ~Static(){}

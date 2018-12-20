@@ -15,11 +15,8 @@ namespace actor {
   public:
     Moveable()
       :Actor() {}
-    Moveable(std::string name, float life, Position p):
-      Actor(name, life, p) {}
-
-    //virtual void act(float dt) = 0;
-    //virtual void update(Viewport const & vp);
+    Moveable(const std::string & name, float life, const Position & p);
+      
     virtual void load(std::ifstream & in);
     virtual void save(std::ofstream & out);
     virtual void loadSprite(const char path[]);

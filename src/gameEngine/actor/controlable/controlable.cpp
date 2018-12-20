@@ -48,10 +48,13 @@ void Controlable::moveY(float dt)
 
 void Controlable::move(float dt)
 {
-  int   o[16] = {_orientation,N,S,_orientation,W,NE,SW,W,E,NW,SE,E,_orientation,N,S,_orientation};
+  int    o[16] = {_orientation,N,S,_orientation,W,NE,SW,W,E,NW,SE,E,_orientation,N,S,_orientation};
+  b2Vec2 linearVelocity;
   
-  _position.x += _speed * (ihm::Keyboard::keys[RIGHT] - ihm::Keyboard::keys[LEFT]);
-  _position.y += _speed * (ihm::Keyboard::keys[FORWARD] - ihm::Keyboard::keys[BACK]);
+  linearVelocity.x += _speed * (ihm::Keyboard::keys[RIGHT] - ihm::Keyboard::keys[LEFT]);
+  linearVelocity.y += _speed * (ihm::Keyboard::keys[FORWARD] - ihm::Keyboard::keys[BACK]);
+
+  _body->SetLinearVelocity(linearVelocity);
   
   _orientation = o[(ihm::Keyboard::keys[RIGHT]<<3) + (ihm::Keyboard::keys[LEFT]<<2) + (ihm::Keyboard::keys[BACK]<<1) + ihm::Keyboard::keys[FORWARD]];
 }
@@ -81,7 +84,7 @@ void Controlable::moveCamera()
   getDimensionWindow(&w, &h);
   getCoordElement(_elem, &x, &y);
   _stage->viewport().x += ((x+_position.w/2) - w/2 )*0.1;
-  _stage->viewport().y += ( h/2 - (y+_position.h/2))*0.01;
+  _stage->viewport().y += ( h/2 - (y+_position.h/2))*0.1;
 }
 
 void Controlable::loadSprite()

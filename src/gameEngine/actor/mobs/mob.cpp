@@ -1,5 +1,5 @@
 #include <cstdlib>
-
+#include <Box2D/Box2D.h>
 #include "mob.h"
 
 #include "../../stage.h"
@@ -14,6 +14,16 @@ Mob::Mob(std::string name, float life, Position pos):Moveable(name, life, pos)
   _speed = INIT_SPEED;
   _state = COOL;
   _waitingTime = INIT_WAIT;
+
+  b2BodyDef bodyDef;
+  bodyDef.position.Set(pos.x, pos.y);
+
+  _body = Stage::world().CreateBody(&bodyDef);
+
+  b2PolygonShape box;
+  box.SetAsBox(pos.w / 2.f, pos.h / 2.f);
+
+  _body->CreateFixture(&box, 0.0f);
 }
 
 void Mob::move(float dt)

@@ -2,7 +2,6 @@
 #include "actor.h"
 #include "../stage.h"
 #include <iostream>
-#include <Box2D/Box2D.h>
 
 using actor::Actor;
 using actor::Data;
@@ -15,7 +14,7 @@ void Actor::update(Viewport const & vp)
     {
       b2Vec2 pos = _body->GetPosition();
       
-      replaceElement(_elem, mToP * (pos.x - vp.x), mToP * (vp.height - _position.h -pos.y + vp.y));
+      replaceElement(_elem, mToP * (pos.x - vp.x - _position.w/2), mToP * (vp.height - _position.h /2 -pos.y + vp.y));
       setDimensionElement(_elem, mToP * _position.w, mToP * _position.h);
     }
 }
@@ -64,21 +63,6 @@ Actor::Actor(const std::string & name, float life):_elem(nullptr), _life(life), 
 
 Actor::Actor(const std::string & name, float life, const Position & pos) :_position(pos),_elem(nullptr), _life(life), _name(name), _hitbox(&_position)
 {
-  b2BodyDef bodyDef;
-  bodyDef.type = b2_dynamicBody;
-  bodyDef.position.Set(pos.x, pos.y);
-  _body = Stage::world().CreateBody(&bodyDef);
-
-  
-  b2PolygonShape dynamicBox;
-  dynamicBox.SetAsBox(pos.w/2.f, pos.h/2.f);
-
-  b2FixtureDef fixtureDef;
-  fixtureDef.shape = &dynamicBox;
-  fixtureDef.density = 1.0f;
-  fixtureDef.friction = 0.3f;
-
-  _body->CreateFixture(&fixtureDef);
   
   onClick = NULL;
 }
