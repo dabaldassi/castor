@@ -11,7 +11,6 @@ using namespace actor;
 Objective::Objective(std::string name, int limit, int id):Actor(name,1), _limit(limit), _current(0), _id(id)
 {
   _position = Position(0,id*50, 300, 100);
-  _hitbox.use = false;
   
   loadSprite();
  

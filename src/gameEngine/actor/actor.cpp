@@ -59,7 +59,7 @@ Actor::Actor(const std::string & name, float life):_elem(nullptr), _life(life), 
   onClick = NULL;
 }
 
-Actor::Actor(const std::string & name, float life, const Position & pos) :_position(pos/Viewport::METER_TO_PIXEL),_elem(nullptr), _life(life), _name(name), _hitbox(&_position)
+Actor::Actor(const std::string & name, float life, const Position & pos) :_position(pos/Viewport::METER_TO_PIXEL),_elem(nullptr), _life(life), _name(name)
 {
   onClick = NULL;
 }
@@ -89,7 +89,6 @@ void Actor::save(std::ofstream &out)
       out.write((char *)&length, sizeof(int));
       out.write((char *)_name.c_str(), sizeof(char)*length);
       out.write((char *)&_orientation, sizeof(int));
-      _hitbox.save(out);
     }
 }
 
@@ -111,7 +110,6 @@ void Actor::load(std::ifstream &in)
 
       in.read((char *)&_orientation, sizeof(int));
 
-      _hitbox.load(in);
     }
 }
 

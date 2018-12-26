@@ -9,7 +9,7 @@ Static::Static(const std::string & name, const Position & p):Actor(name, 1, p)
 {
   b2BodyDef bodyDef;
   Position pos = p/Viewport::METER_TO_PIXEL;
-  bodyDef.position.Set(pos.x, pos.y);
+  bodyDef.position.Set(pos.x + pos.w / 2, pos.y + pos.h/2);
 
   _body = Stage::world().CreateBody(&bodyDef);
 

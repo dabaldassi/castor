@@ -28,8 +28,7 @@ void Ball::act(float dt)
   getDimensionWindow(&w, &h);
   
   move(dt);
-  searchCollision();
-
+  
   if(_position.y < 0 || _position.y > h)
     _stage->endStage();
 }

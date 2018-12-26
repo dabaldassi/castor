@@ -22,7 +22,6 @@ void Item::effect()
   if(_onTheGround)
     {
       _onTheGround = false;
-      _hitbox.use = false;
       _position.use = false;
       
       

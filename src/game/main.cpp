@@ -22,7 +22,6 @@ void move(actor::Actor * c, float dt)
   // Cast the actor in Controlable to call the move function of controlable
   dynamic_cast<actor::Controlable *>(c)->move(dt);
   dynamic_cast<actor::Controlable *>(c)->moveCamera();
-  dynamic_cast<actor::Controlable *>(c)->searchCollision();
 }
 
 void soundCollision(actor::Actor * c, actor::Actor * c2)

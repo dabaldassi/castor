@@ -27,9 +27,6 @@ namespace actor {
     
     virtual void move(float dt=0) = 0;
     
-    virtual void searchCollision();
-    
-    
     virtual ~Moveable();
   };
 

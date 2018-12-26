@@ -12,12 +12,12 @@
 #include <functional>
 #include <SDL2/SDL_mixer.h>
 #include <Box2D/Dynamics/b2Body.h>
+#include <vector>
 
 #include "../viewport.h"
+#include "../position.h"
 
 #include "../../SANDAL2/Element.h"
-
-#include "../hitbox.h"
 
 class Stage;
 
@@ -59,7 +59,6 @@ namespace actor {
     float       _life;
     std::string _name;
     int         _orientation;
-    Hitbox      _hitbox;
     b2Body   *  _body;
     
     std::vector<Mix_Chunk *> _sounds;
@@ -93,9 +92,7 @@ namespace actor {
 
     virtual Position & getPosition() { return _position; }
     virtual const Position & getPosition() const { return _position; }
-
-    virtual Hitbox & getHitbox()  { return _hitbox; }
-
+    
     virtual void effect();
 
     virtual void effect(Actor *);

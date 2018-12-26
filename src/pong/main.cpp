@@ -8,13 +8,11 @@
 void move1(actor::Actor * a, float dt)
 {
   dynamic_cast<actor::Controlable *>(a)->moveX(); // Cast in Controlable to call moveX(). moveX() move the actor on the X axis
-  dynamic_cast<actor::Controlable *>(a)->searchCollision(); // Cast in Controlable to call the method searchcollision 
 }
 
 void move2(actor::Actor * a, float dt)
 {
   dynamic_cast<actor::Controlable *>(a)->moveX();
-  dynamic_cast<actor::Controlable *>(a)->searchCollision(); 
 }
 
 void generate(Stage * s)
@@ -27,15 +25,17 @@ void generate(Stage * s)
   a = &s->create<actor::Controlable>("Player1", 1, Position(w/2.f,12, 100, 10)); // Create an actor controlable
   a->loadSprite(Color::white); // Load a white rectangle
   a->addActStatement(move1); // Add a new statement to the actor
-
-  a = &s->create<actor::Controlable>("Player2", 1, Position(w/2.f,h - 2,100,10)); // Create player 2
+  dynamic_cast<actor::Controlable *>(a)->setSpeed(10.f);
+  
+  a = &s->create<actor::Controlable>("Player2", 1, Position(w/2.f,h - 20,100,10)); // Create player 2
   a->loadSprite(Color::white);
   a->addActStatement(move2);
+  dynamic_cast<actor::Controlable *>(a)->setSpeed(10.f);
 
-  s->create<actor::Static>("Wall", Position(-10,h,10,h)); // Create a Wall to avoid exiting the screen
-  s->create<actor::Static>("Wall", Position(w,h,10,h)); // Create a second wall
+  s->create<actor::Static>("Wall", Position(-10,0,10,h)); // Create a Wall to avoid exiting the screen
+  s->create<actor::Static>("Wall", Position(w,0,10,h)); // Create a second wall
   
-  s->create<actor::Ball>("Ball", Position(w/2,h/2,10,10));
+  //s->create<actor::Ball>("Ball", Position(w/2,h/2,10,10));
 
   s->addMusic("../sound/music.wav"); // Load the level music
   s->playMusic(0); // Play the music

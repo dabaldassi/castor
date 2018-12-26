@@ -7,8 +7,7 @@
 #ifndef HITBOX_H
 #define HITBOX_H
 
-#include <vector>
-#include "position.h"
+
 
 /**
  *\struct LineBox

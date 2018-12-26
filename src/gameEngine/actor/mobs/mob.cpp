@@ -43,8 +43,7 @@ void Mob::act(float dt)
   if(_actfct.size() != 0) Actor::act(dt); // If there is function to call
   else { // If there is no function this is the default
     move(dt);
-  
-    searchCollision();
+    
   }
 }
 

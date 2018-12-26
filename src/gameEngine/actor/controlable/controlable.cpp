@@ -24,26 +24,34 @@ Controlable::Controlable(const std::string & name, float life, const Position & 
 
 void Controlable::moveX(float dt)
 {
+  b2Vec2 linearVelocity = _body->GetLinearVelocity();
+  
   if(_keyboard) {
     if(_id == 1)
-      _position.x += _speed*(ihm::Keyboard::keys[RIGHT] - ihm::Keyboard::keys[LEFT]);
+      linearVelocity.x = _speed*(ihm::Keyboard::keys[RIGHT] - ihm::Keyboard::keys[LEFT]);
     else
-      _position.x += _speed*(ihm::Keyboard::keys[RIGHT_2] - ihm::Keyboard::keys[LEFT_2]);
+      linearVelocity.x = _speed*(ihm::Keyboard::keys[RIGHT_2] - ihm::Keyboard::keys[LEFT_2]);
 
     _orientation = ((ihm::Keyboard::keys[RIGHT] || ihm::Keyboard::keys[RIGHT_2]) ? E : W);
   }
+
+  _body->SetLinearVelocity(linearVelocity);
 }
 
 void Controlable::moveY(float dt)
 {
+  b2Vec2 linearVelocity = _body->GetLinearVelocity();
+  
    if(_keyboard) {
     if(_id == 1)
-      _position.y += _speed*(ihm::Keyboard::keys[FORWARD] - ihm::Keyboard::keys[BACK]);
+      linearVelocity.y = _speed*(ihm::Keyboard::keys[FORWARD] - ihm::Keyboard::keys[BACK]);
     else
-      _position.y += _speed*(ihm::Keyboard::keys[FORWARD_2] - ihm::Keyboard::keys[BACK_2]);
+      linearVelocity.y = _speed*(ihm::Keyboard::keys[FORWARD_2] - ihm::Keyboard::keys[BACK_2]);
 
     _orientation = ((ihm::Keyboard::keys[FORWARD] || ihm::Keyboard::keys[FORWARD_2]) ? N : S);
    }
+
+   _body->SetLinearVelocity(linearVelocity);
 }
 
 void Controlable::move(float dt)
@@ -70,10 +78,6 @@ void Controlable::act(float dt)
     
     moveCamera();
   
-    /* Search for collision */
-  
-    searchCollision();
-    
   }
 }
 
