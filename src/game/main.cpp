@@ -25,11 +25,15 @@ void move(actor::Actor * c, float dt)
   dynamic_cast<actor::Controlable *>(c)->searchCollision();
 }
 
+void soundCollision(actor::Actor * c, actor::Actor * c2)
+{
+  c->playSound(0);
+}
+
 void effect(actor::Actor * c, actor::Actor * c2)
 {
   std::cout << c->getName() << ": salut" << "\n";
-
-  c->playSound(0);
+  
   std::cout << c->getData<DataPlayer *>()->a << "\n";
 }
 
@@ -57,14 +61,23 @@ void generate(Stage * stage)
   stage->player = &(stage->create<actor::Controlable>("Jack", 1, Position(w/2, h/2, 100,100))); // Create an actor controlable
   stage->player->addOnClickEvent(click);
   stage->player->addActStatement(move); // Add a statement to the actor
-  stage->player->addEffectStatement(effect);
+  stage->player->addCollisionOnStatement(effect);
+  stage->player->addCollisionOnStatement(soundCollision);
   stage->player->addSound("../sound/hit.wav");
   stage->player->setData(data);
   
-  stage->create<actor::Mob>("cow", 10, Position(0,0,233,170)).addEffectStatement(effectCow); // Create a mob
+  stage->create<actor::Mob>("cow", 10, Position(0,0,233,170)).addCollisionOnStatement(effectCow); // Create a mob
+
+  
   a = &stage->create<actor::Static>("bloc", Position(200, 200, 100, 100)); // Create a bloc
   a->loadSprite(Color::green);
 
+  a = &stage->create<actor::Static>("ground", Position(0,0,2*w,10));
+  a->loadSprite(Color::green);
+  //printf("%f\n", a->getPosition().h);
+  
+  stage->world().SetGravity(b2Vec2(0,-10));
+  
   //a = &stage->create<actor::Static>("bloc", Position(0, 0, 100, 100)); // Create a bloc
   //a->loadSprite(Color::green);
 }

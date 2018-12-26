@@ -21,14 +21,12 @@ void Actor::update(Viewport const & vp)
 
 void Actor::act(float dt)
 {
-  for(auto a: _actfct)
-    a(this, dt);
+  for(auto a: _actfct) a(this, dt);
 }
 
 void Actor::effect()
 {
-  for(auto a: _effectfct)
-    a(this);
+  for(auto a: _effectfct) a(this);
 }
 
 
@@ -61,9 +59,8 @@ Actor::Actor(const std::string & name, float life):_elem(nullptr), _life(life), 
   onClick = NULL;
 }
 
-Actor::Actor(const std::string & name, float life, const Position & pos) :_position(pos),_elem(nullptr), _life(life), _name(name), _hitbox(&_position)
+Actor::Actor(const std::string & name, float life, const Position & pos) :_position(pos/Viewport::METER_TO_PIXEL),_elem(nullptr), _life(life), _name(name), _hitbox(&_position)
 {
-  
   onClick = NULL;
 }
 
@@ -182,4 +179,14 @@ void Actor::addOnClickEvent(std::function<void(Actor *, int)> fct)
   onClick = fct;
   setOnClickElement(_elem, click);
   addClickableElement(_elem, rectangleClickable(0.f, 0.f, 1.f, 1.f), 0);
+}
+
+void Actor::collisionOn(actor::Actor *actor)
+{
+  for(auto f:_collisionOn) f(this,actor);
+}
+
+void Actor::collisionOff(actor::Actor *actor)
+{
+  for(auto f:_collisionOff) f(this,actor);
 }

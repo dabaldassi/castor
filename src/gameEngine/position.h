@@ -42,4 +42,6 @@ struct Position
   void load(std::ifstream & in);
 };
 
+Position operator/(const Position & p, float d);
+
 #endif /* POSITION_H */

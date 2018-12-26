@@ -67,6 +67,8 @@ namespace actor {
     std::vector<std::function<void(Actor *, float)>>   _actfct;
     std::vector<std::function<void(Actor *)>>          _effectfct;
     std::vector<std::function<void(Actor *, Actor *)>> _effectfct2;
+    std::vector<std::function<void(Actor *, Actor *)>> _collisionOn;
+    std::vector<std::function<void(Actor *, Actor *)>> _collisionOff;
     
   public:
     std::function<void(Actor *, int)> onClick;
@@ -102,11 +104,15 @@ namespace actor {
 
     virtual void kill() { _life = 0; }
 
-    virtual void addActStatement(std::function<void(Actor *, float)> fct) {_actfct.push_back(fct);}
+    virtual void addActStatement(const std::function<void(Actor *, float)> & fct) {_actfct.push_back(fct);}
 
-    virtual void addEffectStatement(std::function<void(Actor *)> fct) {_effectfct.push_back(fct);}
+    virtual void addEffectStatement(const std::function<void(Actor *)> & fct) {_effectfct.push_back(fct);}
 
-    virtual void addEffectStatement(std::function<void(Actor *, Actor *)> fct) {_effectfct2.push_back(fct);}
+    virtual void addEffectStatement(const std::function<void(Actor *, Actor *)> & fct) {_effectfct2.push_back(fct);}
+
+    virtual void addCollisionOnStatement(const std::function<void(Actor *, Actor *)> & fct) {_collisionOn.push_back(fct);}
+    
+    virtual void addCollisionOffStatement(const std::function<void(Actor *, Actor *)> & fct) {_collisionOff.push_back(fct);}
 
     virtual void addOnClickEvent(std::function<void(Actor *, int)> fct);
    
@@ -172,6 +178,11 @@ namespace actor {
      */
     
     virtual void loadAnnexe(std::ifstream & in) {}
+
+
+    virtual void collisionOn(Actor * actor);
+
+    virtual void collisionOff(Actor * actor);
 
     /**
      *\fn virtual void setData(const D & data)

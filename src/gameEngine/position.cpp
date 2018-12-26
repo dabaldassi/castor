@@ -1,5 +1,10 @@
 #include "position.h"
 
+Position operator/(const Position & p, float d)
+{
+  return Position(p.x/d, p.y/d, p.w/d, p.h/d);
+}
+
 bool Position::collide(const Position & p) const
 {
   return (p.x + p.w >= x && p.x <= x + w) && (p.y + p.h >= y && p.y <= y + h);

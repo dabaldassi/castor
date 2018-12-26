@@ -12,7 +12,7 @@ using actor::Actor;
 
 int Controlable::_nb_controlable_keyboard = 0;
 
-Controlable::Controlable(std::string name, float life, Position pos, bool keyboard):Moveable(name,life, pos)
+Controlable::Controlable(const std::string & name, float life, const Position & pos, bool keyboard):Moveable(name,life, pos)
 {
   loadSprite();
   
@@ -49,7 +49,7 @@ void Controlable::moveY(float dt)
 void Controlable::move(float dt)
 {
   int    o[16] = {_orientation,N,S,_orientation,W,NE,SW,W,E,NW,SE,E,_orientation,N,S,_orientation};
-  b2Vec2 linearVelocity;
+  b2Vec2 linearVelocity = _body->GetLinearVelocity();
   
   linearVelocity.x += _speed * (ihm::Keyboard::keys[RIGHT] - ihm::Keyboard::keys[LEFT]);
   linearVelocity.y += _speed * (ihm::Keyboard::keys[FORWARD] - ihm::Keyboard::keys[BACK]);
@@ -73,6 +73,7 @@ void Controlable::act(float dt)
     /* Search for collision */
   
     searchCollision();
+    
   }
 }
 
@@ -83,8 +84,8 @@ void Controlable::moveCamera()
 
   getDimensionWindow(&w, &h);
   getCoordElement(_elem, &x, &y);
-  _stage->viewport().x += ((x+_position.w/2) - w/2 )*0.1;
-  _stage->viewport().y += ( h/2 - (y+_position.h/2))*0.1;
+  _stage->viewport().x += ((x+_position.w/2) - w/2 )*0.001;
+  _stage->viewport().y += ( h/2 - (y+_position.h/2))*0.001;
 }
 
 void Controlable::loadSprite()

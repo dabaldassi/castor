@@ -6,6 +6,7 @@
 #include <SDL2/SDL_mixer.h>
 
 #include "game.h"
+#include "contactListener.h"
 
 #include "ihm/keyboard.h"
 #include "ihm/button.h"
@@ -186,6 +187,9 @@ void Game::event_manager(bool (*statement)(float))
   float        dt;
   bool         run = true;
   DataWindow * dataw;
+  ContactListener contact;
+
+  Stage::world().SetContactListener(&contact);
   
   while(run)
     {
@@ -197,7 +201,7 @@ void Game::event_manager(bool (*statement)(float))
       
       getDataWindow((void **)&dataw);
 
-      Stage::world().Step(dt, 10, 3);
+      Stage::world().Step(dt/1000.f, 10, 3);
       
       run = run && dataw->param;
       dataw->param = (run)?dataw->param:0;

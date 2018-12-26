@@ -12,7 +12,7 @@
  * This cass contains information relative to the area visible in the windows
  */
 struct Viewport {
-  static constexpr float METER_TO_PIXEL = 1.;
+  static constexpr float METER_TO_PIXEL = 50.;
 
 	float x;
 	float y;

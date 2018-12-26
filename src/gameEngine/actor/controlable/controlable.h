@@ -10,8 +10,6 @@
 
 #include "../moveable.hpp"
 
-#define INIT_SPEED_CONTROLABLE 3.f
-
 namespace actor {
   
   /**
@@ -26,8 +24,10 @@ namespace actor {
     bool       _keyboard; // If the controlable use the keyboard/mouse or joysticks
     static int _nb_controlable_keyboard; // Number of controlable created
   public:
+    static constexpr float INIT_SPEED_CONTROLABLE = 7.f / Viewport::METER_TO_PIXEL;
+    
     Controlable(){}
-    Controlable(std::string name, float life, Position pos, bool keyboard = true);
+    Controlable(const std::string & name, float life, const Position & pos, bool keyboard = true);
 
     virtual void act(float dt);
     virtual void loadSprite();

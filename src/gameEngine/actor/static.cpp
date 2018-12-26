@@ -5,9 +5,10 @@
 
 using actor::Static;
 
-Static::Static(const std::string & name, const Position & pos):Actor(name, 1, pos)
+Static::Static(const std::string & name, const Position & p):Actor(name, 1, p)
 {
   b2BodyDef bodyDef;
+  Position pos = p/Viewport::METER_TO_PIXEL;
   bodyDef.position.Set(pos.x, pos.y);
 
   _body = Stage::world().CreateBody(&bodyDef);
@@ -15,7 +16,13 @@ Static::Static(const std::string & name, const Position & pos):Actor(name, 1, po
   b2PolygonShape box;
   box.SetAsBox(pos.w / 2.f, pos.h / 2.f);
 
-  _body->CreateFixture(&box, 0.0f);
+  b2FixtureDef fixtureDef;
+  fixtureDef.shape = &box;
+  fixtureDef.density = 500.f;
+  _body->CreateFixture(&fixtureDef);
+  
+  _body->CreateFixture(&fixtureDef);
+  _body->SetUserData((void *)this);
   
   loadSprite();
 }
