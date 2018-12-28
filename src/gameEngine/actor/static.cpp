@@ -19,7 +19,7 @@ Static::Static(const std::string & name, const Position & p):Actor(name, 1, p)
   b2FixtureDef fixtureDef;
   fixtureDef.shape = &box;
   fixtureDef.density = 500.f;
-  _body->CreateFixture(&fixtureDef);
+  fixtureDef.restitution = 0.f;
   
   _body->CreateFixture(&fixtureDef);
   _body->SetUserData((void *)this);

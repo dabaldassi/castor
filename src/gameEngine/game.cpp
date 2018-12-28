@@ -61,7 +61,7 @@ Game::Game(int w, int h, const char * name):stage{w,h}
 Game::~Game()
 {
   Mix_Quit();
-  
+ 
   closeAllWindow(); /* close all windows */
   closeAllSANDAL2();
 }
@@ -218,6 +218,8 @@ void Game::event_manager(bool (*statement)(float))
 	run = false;
       
     }
+
+  Stage::world().SetContactListener(NULL);
   
 }
 

@@ -80,6 +80,14 @@ namespace actor {
     
     virtual ~Actor();
 
+    b2Body * body() { return _body; }
+
+    const b2Body * body() const { return _body; }
+
+    Stage * stage() { return _stage; }
+
+    const Stage * stage() const { return _stage; }
+
     virtual void setStage(Stage * stage) { _stage = stage; }
 
     virtual const std::string & getName() const { return _name; }

@@ -20,12 +20,12 @@ namespace actor {
     virtual void load(std::ifstream & in);
     virtual void save(std::ofstream & out);
     virtual void loadSprite(const char path[]);
-    virtual void loadSprite() = 0;
+    virtual void loadSprite(int color[]) { Actor::loadSprite(color); };
+    virtual void loadSprite(){};
     virtual void saveAnnexe(std::ofstream & out){}
     virtual void loadAnnexe(std::ifstream & in){}
     virtual void setSpeed(float speed) { _speed = speed; }
-    
-    virtual void move(float dt=0) = 0;
+    virtual void move(float dt=0){};
     
     virtual ~Moveable();
   };

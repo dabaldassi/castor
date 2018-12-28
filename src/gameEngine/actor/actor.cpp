@@ -2,6 +2,7 @@
 #include "actor.h"
 #include "../stage.h"
 #include <iostream>
+#include <Box2D/Box2D.h>
 
 using actor::Actor;
 using actor::Data;
@@ -48,6 +49,7 @@ void click(Element * e, int b)
 Actor::Actor()
 {
   _elem = NULL;
+  _body = NULL;
   _life = 0;
   _position = Position(0,0,0,0);
   _position.use = false;
@@ -61,6 +63,7 @@ Actor::Actor(const std::string & name, float life):_elem(nullptr), _life(life), 
 
 Actor::Actor(const std::string & name, float life, const Position & pos) :_position(pos/Viewport::METER_TO_PIXEL),_elem(nullptr), _life(life), _name(name)
 {
+  _body = NULL;
   onClick = NULL;
 }
 
@@ -71,6 +74,19 @@ Actor::~Actor()
       delElement(_elem);
       _elem = NULL;
     }
+
+  if(_body) {
+    b2JointEdge * j = _body->GetJointList();
+    _body->SetUserData(NULL);
+    
+    while(j) {
+      
+      _stage->world().DestroyJoint(j->joint);
+      j = j->next;
+    }
+    
+    _stage->world().DestroyBody(_body);
+  }
 
   for (unsigned int i = 0; i < _sounds.size(); i++) {
     Mix_FreeChunk(_sounds[i]);
