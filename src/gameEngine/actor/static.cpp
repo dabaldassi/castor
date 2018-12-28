@@ -1,6 +1,6 @@
 #include <Box2D/Box2D.h>
 
-#include "../stage.cpp"
+#include "../stage.h"
 #include "static.h"
 
 using actor::Static;
