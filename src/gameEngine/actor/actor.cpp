@@ -17,6 +17,7 @@ void Actor::update(Viewport const & vp)
       
       replaceElement(_elem, mToP * (pos.x - vp.x - _position.w/2), mToP * (vp.height - _position.h /2 -pos.y + vp.y));
       setDimensionElement(_elem, mToP * _position.w, mToP * _position.h);
+      setAngleElement(_elem, -_body->GetAngle()*180/M_PI);
     }
 }
 
