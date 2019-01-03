@@ -20,7 +20,7 @@ void ContactListener::BeginContact(b2Contact * contact)
 void ContactListener::EndContact(b2Contact * contact)
 {
   void * a1 = contact->GetFixtureA()->GetBody()->GetUserData();
-  void * a2 = contact->GetFixtureA()->GetBody()->GetUserData();
+  void * a2 = contact->GetFixtureB()->GetBody()->GetUserData();
 
   if(a1) {
     static_cast<actor::Actor *>(a1)->collisionOff(static_cast<actor::Actor *>(a2));

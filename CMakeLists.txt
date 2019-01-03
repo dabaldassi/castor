@@ -12,7 +12,7 @@ endif()
 find_package(SDL2 REQUIRED)
 find_package(Box2D REQUIRED)
 
-include_directories(src ${SDL2_INCLUDE_DIRS})
+include_directories(src ${SDL2_INCLUDE_DIRS} src/gameEngine)
 
 file(GLOB_RECURSE sandal2_sources src/SANDAL2/*.c)
 add_library(sandal2 ${sandal2_sources})

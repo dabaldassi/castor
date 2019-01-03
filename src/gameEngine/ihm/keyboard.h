@@ -5,7 +5,7 @@
 
 #include "../../SANDAL2/SANDAL2.h"
 
-#define NB_KEYS 14
+#define NB_KEYS 15
 #define NB_CUSTOM_KEYS 8
 #define KEY_FILE "kkb.bin"
 

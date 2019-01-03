@@ -134,9 +134,9 @@ void Actor::loadSprite(const char path[])
 {
   int green[] = {0,255,0,0};
 
-  if(_elem) delElement(_elem);
-  
-  _elem = createImage(_position.x, _position.y, _position.w, _position.h, path, 0, 0);
+  if(_elem) setImageElement(_elem, path);
+  else
+    _elem = createImage(_position.x, _position.y, _position.w, _position.h, path, 0, 0);
   
   if(_elem == NULL) // Default
     _elem = createBlock(_position.x, _position.y, _position.w, _position.h, green, 0, 0);
@@ -144,9 +144,9 @@ void Actor::loadSprite(const char path[])
 
 void Actor::loadSprite(int color[4])
 {
-  if(_elem) delElement(_elem);
-
-  _elem = createBlock(_position.x, _position.y, _position.w, _position.h, color, 0, 0);
+  if(_elem) setColorElement(_elem, color);
+  else
+    _elem = createBlock(_position.x, _position.y, _position.w, _position.h, color, 0, 0);
 }
 
 void Actor::addSound(const char *path)

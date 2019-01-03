@@ -20,7 +20,7 @@ void Keyboard::init()
   binding[BACK]       = SDLK_s;
   binding[PAUSE]      = SDLK_ESCAPE;
   binding[MAP]        = SDLK_m;
-  binding[INTERACT]   = SDLK_z;
+  binding[INTERACT]   = SDLK_e;
   binding[ATTACK]     = SDL_BUTTON_LEFT;
   binding[JUMP]       = SDLK_SPACE;
   binding[RIGHT_2]    = SDLK_RIGHT;
@@ -50,7 +50,7 @@ void Keyboard::wheel(int y)
 void Keyboard::search(int c, bool b)
 {
   int i = 0;
-
+  
   while(c != binding[i] && i< NB_KEYS)
     ++i;
 
