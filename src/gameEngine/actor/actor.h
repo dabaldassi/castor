@@ -100,6 +100,7 @@ namespace actor {
 
     virtual Position & getPosition() { return _position; }
     virtual const Position & getPosition() const { return _position; }
+    virtual float getLife() const { return _life; }
     
     virtual void effect();
 
@@ -129,7 +130,7 @@ namespace actor {
      *\param id Identifier of the sound (an actor may have several sounds)
      */
     
-    virtual void playSound(unsigned int id, int ch = -1);
+    virtual void playSound(unsigned int id);
     
     /**
      *\fn virtual void save(std::ofstream & out)

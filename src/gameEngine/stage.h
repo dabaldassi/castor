@@ -37,6 +37,9 @@ private:
   std::function<void(Stage *)> gen;
   bool                         _end;
   std::vector<Mix_Music *>     _music;
+  std::function<bool(void *)>  _endCond;
+  std::function<void(Stage *, void *)>  _endCallback;
+  void                       * _data;
   
 public:
   actor::Controlable * player; /* Some actor need to interact with the player */
@@ -121,7 +124,11 @@ public:
    */
   
   void endStage() { _end = true; }
-
+  void disableEnd() { _end = false; }
+  void setEndStage(std::function<bool(void *)> f) { _endCond = f; }
+  void endCallback(std::function<void(Stage *,void *)> f) { _endCallback = f; }
+  void setData(void * data) { _data = data; }
+  void * getData() { return _data; }
   /**
    *\fn bool end()
    *\brief Tell if the stage must be ended

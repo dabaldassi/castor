@@ -162,10 +162,15 @@ void Actor::addSound(const char *path)
     std::cerr << "Failed to open : " << path << "\n";
 }
 
-void Actor::playSound(unsigned int id, int ch)
+void Actor::playSound(unsigned int id)
 {
+  int ch = 0;
+  
   if(id < _sounds.size()) {
-    Mix_PlayChannel(id,_sounds[id], 0);
+
+    while(Mix_Playing(ch)) ch++;
+    
+    Mix_PlayChannel(ch,_sounds[id], 0);
   }
 }
 

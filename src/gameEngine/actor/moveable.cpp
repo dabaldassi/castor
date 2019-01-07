@@ -23,7 +23,6 @@ Moveable::Moveable(const std::string & name, float life, const Position & p):Act
   fixtureDef.shape = &dynamicBox;
   fixtureDef.density = 0.5f;
   fixtureDef.friction = 0.8f;
-  //fixtureDef.restitution = 1.f;
   
   _body->CreateFixture(&fixtureDef);
   _body->SetUserData((void *)this);

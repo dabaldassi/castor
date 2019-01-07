@@ -22,21 +22,30 @@ namespace actor {
   protected:
     bool  _onTheGround; /* If the item is on the ground, it can be picked */
     float _weight;
+    
+    std::string  _path;
+    int          _color[4];
+    
   public:
     Item(){}
-    Item(std::string name, float weight)
+    Item(const std::string & name, float weight)
       : Actor(name, 1), _weight(weight) {}
-    Item(std::string name, Position pos, float weight);
+    Item(const std::string & name, const Position & p, float weight);
 
-    void setOnGround() { _onTheGround = true; }
+    void drop(const b2Vec2 & pos = b2Vec2(0,0));
     bool isOnTheGround() const { return _onTheGround; }
     float getWeight() const { return _weight; }
     
     virtual void effect();
     virtual void update();
-    virtual void loadSprite() { Actor::loadSprite("../sprites/items/"); }
+    virtual void loadSprite();
+    virtual void loadSprite(const char * path);
+    virtual void loadSprite(int color[4]);
     virtual void load(std::ifstream & in);
     virtual void save(std::ofstream & out);
+    virtual Item * pick();
+
+    virtual ~Item() = default;
   };
 
 

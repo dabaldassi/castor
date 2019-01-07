@@ -32,7 +32,10 @@ Stage::Stage(int width, int height) : _vp{width, height}, _end(false)
 {
   for(int i=0;i < NB_OBJ_EVENT;i++)
     _objectiveEvent[i] = 0;
-  
+
+  _data = NULL;
+  _endCond = NULL;
+  _endCallback = NULL;
 }
 
 void Stage::remove(ActorPtr & actor) 
@@ -72,6 +75,13 @@ void Stage::act(float dt)
       remove(*toDelete);
       toDelete = nullptr;
     }
+
+  if(!_end && _endCond)
+    _end = _endCond(_data);
+
+  if(_end && _endCallback) {
+    _endCallback(this,_data);
+  }
 }
 
 void Stage::save()
