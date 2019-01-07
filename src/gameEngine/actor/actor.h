@@ -24,6 +24,7 @@ class Stage;
 namespace actor {
 
   class Actor;
+  class Item;
   
   class Data
   {
@@ -83,6 +84,10 @@ namespace actor {
     b2Body * body() { return _body; }
 
     const b2Body * body() const { return _body; }
+
+    Element * elem() { return _elem; }
+
+    const Element * elem() const { return _elem; }
 
     Stage * stage() { return _stage; }
 
@@ -189,6 +194,8 @@ namespace actor {
     virtual void collisionOn(Actor * actor);
 
     virtual void collisionOff(Actor * actor);
+    virtual void addItem(Item * item) = 0;
+    virtual void removeItem(Item * item) = 0;
 
     /**
      *\fn virtual void setData(const D & data)
@@ -205,7 +212,8 @@ namespace actor {
 
     template<class Data=Data *>
     Data getData() const;
-   
+
+    virtual void takeDamage(float damage) { _life -= damage; }
   };
 
   template<class Data=Data *>

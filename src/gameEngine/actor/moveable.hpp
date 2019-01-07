@@ -26,6 +26,8 @@ namespace actor {
     virtual void loadAnnexe(std::ifstream & in){}
     virtual void setSpeed(float speed) { _speed = speed; }
     virtual void move(float dt=0){};
+    virtual void addItem(Item * item){}
+    virtual void removeItem(Item * item){}
     
     virtual ~Moveable();
   };

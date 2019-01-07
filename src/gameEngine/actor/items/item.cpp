@@ -5,7 +5,41 @@
 
 using actor::Item;
 
-Item::Item(const std::string & name, const Position & p, float weight): Actor(name, 1, p), _weight(weight)
+Item::Item(const std::string & name, const Position & p, Actor * actor, float weight, float life):Actor(name, life, p), _weight(weight)
+{
+  _path = "";
+  
+  b2BodyDef bodyDef;
+  Position pos = p / Viewport::METER_TO_PIXEL;
+  
+  bodyDef.type = b2_dynamicBody;
+  bodyDef.position.Set(pos.x + pos.w / 2, pos.y + pos.h/2);
+  _body = Stage::world().CreateBody(&bodyDef);
+
+  
+  b2PolygonShape dynamicBox;
+  dynamicBox.SetAsBox(pos.w/2.f, pos.h/2.f);
+
+  b2FixtureDef fixtureDef;
+  fixtureDef.shape = &dynamicBox;
+  fixtureDef.density = 0.5f;
+  fixtureDef.friction = 0.8f;
+
+  _body->CreateFixture(&fixtureDef);
+
+  b2MassData mass;
+  
+  _body->GetMassData(&mass);
+  mass.mass = weight;
+  _body->SetMassData(&mass);
+  
+  _body->SetUserData((void *)this);
+
+  pick(actor);
+  _toDisable = _toEnable = false;
+}
+
+Item::Item(const std::string & name, const Position & p, float weight, float life): Actor(name, life, p), _weight(weight)
 {
   _path = "";
   
@@ -28,9 +62,17 @@ Item::Item(const std::string & name, const Position & p, float weight): Actor(na
   fixtureDef.shape = &dynamicBox;
   fixtureDef.density = 0.5f;
   fixtureDef.friction = 0.8f;
-  
+
   _body->CreateFixture(&fixtureDef);
+
+  b2MassData mass;
+  
+  _body->GetMassData(&mass);
+  mass.mass = weight;
+  _body->SetMassData(&mass);
+  
   _body->SetUserData((void *)this);
+  _owner = NULL;
 }
 
 void Item::update()
@@ -56,16 +98,21 @@ void Item::drop(const b2Vec2 & pos)
   }
 
   _body->SetTransform(pos, _body->GetAngle());
-  
+  _owner->removeItem(this);
+  _owner = NULL;
+  _toDisable = _toEnable = false;
 }
 
-Item * Item::pick()
+void Item::pick(Actor * actor)
 {
   _onTheGround = false;
   _position.use = false;
-  delElement(_elem);
-  _elem = NULL;
 
+  if(_elem) {
+    delElement(_elem);
+    _elem = NULL;
+  }
+  
   b2Fixture * fixture = _body->GetFixtureList();
   
   while(fixture) {
@@ -74,11 +121,11 @@ Item * Item::pick()
     fixture->SetFilterData(filter);
     fixture = fixture->GetNext();
   }
-
-  return this;
+  actor->addItem(this);
+  _owner = actor;
 }
 
-void Item::effect()
+void Item::effect(Actor * actor)
 {
 
   if(_effectfct.size() == 0) {
@@ -86,11 +133,11 @@ void Item::effect()
     /* Pick the item on the floor */
     if(_onTheGround)
       {
-	pick();
+	pick(actor);
       }
   }
   else {
-    Actor::effect();
+    Actor::effect(actor);
   }
 }
 
@@ -136,4 +183,27 @@ void Item::loadSprite(int color[4])
   Actor::loadSprite(color);
 
   memcpy(_color, color, sizeof(int)*4);
+}
+
+void Item::act(float dt)
+{
+  if(_actfct.size() > 0) Actor::act(dt);
+  else {
+    if(_toEnable) {
+      _toEnable = false;
+      _body->SetActive(true);
+      _body->SetAwake(true);
+    }
+
+    if(_toDisable) {
+      _toDisable = false;
+      _body->SetActive(false);
+      _body->SetAwake(false);
+    }
+  }
+}
+
+void Item::effect()
+{
+  Actor::effect();
 }

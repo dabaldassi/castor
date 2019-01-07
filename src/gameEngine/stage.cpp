@@ -159,7 +159,7 @@ void Stage::addMusic(const char *name)
     std::cerr << "Failed to load " << name << "\n";
 }
 
-void Stage::playMusic(unsigned int id)
+void Stage::playMusic(unsigned int id, int loop)
 {
   if(id < _music.size()) {
     Mix_PlayMusic(_music[id], -1);

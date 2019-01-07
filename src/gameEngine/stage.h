@@ -102,7 +102,7 @@ public:
 
   void addMusic(const char * name);
 
-  void playMusic(unsigned int id);
+  void playMusic(unsigned int id, int loop = -1);
 
   void stopMusic();
 

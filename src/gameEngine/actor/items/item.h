@@ -25,25 +25,33 @@ namespace actor {
     
     std::string  _path;
     int          _color[4];
+    Actor     *  _owner;
+    bool         _toDisable, _toEnable;
     
   public:
     Item(){}
-    Item(const std::string & name, float weight)
-      : Actor(name, 1), _weight(weight) {}
-    Item(const std::string & name, const Position & p, float weight);
+    Item(const std::string & name, const Position & p, Actor * actor, float weight,float life=1.f);
+    Item(const std::string & name, const Position & p, float weight, float life=1.f);
 
     void drop(const b2Vec2 & pos = b2Vec2(0,0));
     bool isOnTheGround() const { return _onTheGround; }
     float getWeight() const { return _weight; }
-    
+
     virtual void effect();
+    virtual void effect(Actor * actor);
     virtual void update();
     virtual void loadSprite();
     virtual void loadSprite(const char * path);
     virtual void loadSprite(int color[4]);
     virtual void load(std::ifstream & in);
     virtual void save(std::ofstream & out);
-    virtual Item * pick();
+    virtual void pick(Actor * actor);
+    virtual void addItem(Item * item){}
+    virtual void removeItem(Item * item){}
+    virtual void act(float dt);
+
+    template <class T=Actor*>
+    T getOwner(T actor) { return static_cast<T>(_owner); }
 
     virtual ~Item() = default;
   };

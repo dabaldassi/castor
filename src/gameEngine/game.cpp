@@ -75,6 +75,10 @@ bool run_statement(float dt)
 {
   DataWindow * data = NULL;
 
+  initIteratorWindow();
+  
+  while(getDataWindow((void **)&data) && !nextWindow());
+    
   if(!getDataWindow((void **)&data) && data)
     {
       if(ihm::Keyboard::keys[PAUSE])
@@ -85,6 +89,7 @@ bool run_statement(float dt)
   
       data->game->stage.act(dt);
       data->game->stage.update();
+
     }
   
   return !data->game->stage.end();    
