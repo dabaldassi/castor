@@ -21,6 +21,8 @@
 
 class Stage;
 
+b2Vec2 operator*(const b2Vec2 & v, float coeff);
+
 namespace actor {
 
   class Actor;
@@ -37,7 +39,10 @@ namespace actor {
     Actor getActor() { return dynamic_cast<Actor>(_actor);}
     
     /**
-     *\brief The method to set the data free
+     *\brief The metb2Vec2 operator*(const b2Vec2 & vec, float coeff)
+{
+  return b2Vec2(vec.x*coeff, vec.y*coeff);
+}hod to set the data free
      */
     static void free(void * e) { delete (Data *) e; }
 
@@ -93,7 +98,7 @@ namespace actor {
 
     const Stage * stage() const { return _stage; }
 
-    virtual void setStage(Stage * stage) { _stage = stage; }
+    void setStage(Stage * stage) { _stage = stage; }
 
     virtual const std::string & getName() const { return _name; }
 
@@ -103,8 +108,6 @@ namespace actor {
     /** Called to draw the actor */
     virtual void update(Viewport const & vp);
 
-    virtual Position & getPosition() { return _position; }
-    virtual const Position & getPosition() const { return _position; }
     virtual float getLife() const { return _life; }
     
     virtual void effect();
@@ -214,6 +217,14 @@ namespace actor {
     Data getData() const;
 
     virtual void takeDamage(float damage) { _life -= damage; }
+
+    template<typename T=Position>
+    std::enable_if_t<std::is_same<T,Position>::value,T>
+    getPosition() { return _position; }
+
+    template<typename T>
+    std::enable_if_t<std::is_same<T,b2Vec2>::value,T>
+    getPosition() { return _body->GetPosition() * Viewport::METER_TO_PIXEL; }
   };
 
   template<class Data=Data *>
@@ -227,7 +238,6 @@ namespace actor {
     return d;
   }
 
- 
 }  // actor
 
 #endif /* ACTOR_H */

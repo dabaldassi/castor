@@ -210,3 +210,8 @@ void Actor::collisionOff(actor::Actor *actor)
 {
   for(auto f:_collisionOff) f(this,actor);
 }
+
+b2Vec2 operator*(const b2Vec2 & v, float coeff)
+{
+  return b2Vec2(v.x * coeff ,v.y * coeff);
+}
