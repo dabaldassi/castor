@@ -13,6 +13,7 @@
 #include <SDL2/SDL_mixer.h>
 #include <Box2D/Dynamics/b2Body.h>
 #include <vector>
+#include <map>
 
 #include "../viewport.h"
 #include "../position.h"
@@ -67,7 +68,8 @@ namespace actor {
     int         _orientation;
     b2Body   *  _body;
     
-    std::vector<Mix_Chunk *> _sounds;
+    std::map<std::string, Mix_Chunk *> _sounds;
+    
       
     std::vector<std::function<void(Actor *, float)>>   _actfct;
     std::vector<std::function<void(Actor *)>>          _effectfct;
@@ -130,15 +132,15 @@ namespace actor {
 
     virtual void addOnClickEvent(std::function<void(Actor *, int)> fct);
    
-    virtual void addSound(const char * path);
+    virtual void addSound(const std::string & path);
 
     /**
-     *\fn virtual void playSound(unsigned int id)
+     *\fn virtual void playSound(const std::string & name)
      *\brief Play the sound of the object
-     *\param id Identifier of the sound (an actor may have several sounds)
+     *\param name Identifier of the sound (an actor may have several sounds)
      */
     
-    virtual void playSound(unsigned int id);
+    virtual void playSound(const std::string & name);
     
     /**
      *\fn virtual void save(std::ofstream & out)

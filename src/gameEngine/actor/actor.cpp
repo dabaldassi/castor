@@ -89,9 +89,8 @@ Actor::~Actor()
     _stage->world().DestroyBody(_body);
   }
 
-  for (unsigned int i = 0; i < _sounds.size(); i++) {
-    Mix_FreeChunk(_sounds[i]);
-  }
+  std::for_each(_sounds.begin(), _sounds.end(), [](auto it) { Mix_FreeChunk(it.second); });
+  
 }
 
 void Actor::save(std::ofstream &out)
@@ -149,28 +148,30 @@ void Actor::loadSprite(int color[4])
     _elem = createBlock(_position.x, _position.y, _position.w, _position.h, color, 0, 0);
 }
 
-void Actor::addSound(const char *path)
+void Actor::addSound(const std::string & path)
 {
   Mix_Chunk * sound;
 
-  sound = Mix_LoadWAV(path);
+  sound = Mix_LoadWAV(path.c_str());
 
   if(sound) {
-    _sounds.push_back(sound);
+    _sounds.emplace(std::make_pair(path, sound));
   }
   else
     std::cerr << "Failed to open : " << path << "\n";
 }
 
-void Actor::playSound(unsigned int id)
+void Actor::playSound(const std::string & name)
 {
   int ch = 0;
+
+  auto search = _sounds.find(name);
   
-  if(id < _sounds.size()) {
+  if(search != _sounds.end()) {
 
     while(Mix_Playing(ch)) ch++;
     
-    Mix_PlayChannel(ch,_sounds[id], 0);
+    Mix_PlayChannel(ch,search->second, 0);
   }
 }
 
