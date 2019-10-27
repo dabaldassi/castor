@@ -1,7 +1,7 @@
 #ifndef CASTOR_PROGRESSBAR_H
 #define CASTOR_PROGRESSBAR_H
 
-#include <SANDAL2/SANDAL2.h>
+#include <SANDAL2.h>
 #include "../position.h"
 
 namespace ihm {

@@ -1,7 +1,7 @@
 #ifndef BUTTON_H
 #define BUTTON_H
 
-#include "../../SANDAL2/SANDAL2.h"
+#include "SANDAL2.h"
 
 void click_pause(Element * elem, int);
 void click_options(Element * elem, int);

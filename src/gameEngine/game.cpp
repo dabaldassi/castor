@@ -46,11 +46,11 @@ Game::Game(int w, int h, const char * name):stage{w,h}
 
   createWindow(w, h, name, /*SDL_WINDOW_FULLSCREEN_DESKTOP*/ SDL_WINDOW_RESIZABLE, black, GAME_D);
   
-  
-  if(initIteratorWindow())
+  if(!initIteratorWindow())
     {
       closeAllSANDAL2();
       fprintf(stderr, "Failed to open window \n");
+      exit(0);
     }
 
   setDataWindow(dataw);
@@ -207,7 +207,7 @@ void Game::event_manager(bool (*statement)(float))
       getDataWindow((void **)&dataw);
 
       Stage::world().Step(dt/1000.f, 10, 3);
-      
+
       run = run && dataw->param;
       dataw->param = (run)?dataw->param:0;
       run = run && statement(dt);
@@ -219,7 +219,7 @@ void Game::event_manager(bool (*statement)(float))
       if(ticks > 0)
 	SDL_Delay(ticks);
 
-      if(initIteratorWindow())
+      if(!initIteratorWindow())
 	run = false;
       
     }

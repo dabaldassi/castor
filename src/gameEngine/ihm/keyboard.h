@@ -3,7 +3,7 @@
 
 #include <iostream>
 
-#include "../../SANDAL2/SANDAL2.h"
+#include "SANDAL2.h"
 
 #define NB_KEYS 15
 #define NB_CUSTOM_KEYS 8

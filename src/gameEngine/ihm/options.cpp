@@ -1,4 +1,4 @@
-#include "../../SANDAL2/SANDAL2.h"
+#include "SANDAL2.h"
 #include "keyboard.h"
 #include "color.h"
 #include "text.h"

@@ -12,21 +12,23 @@ endif()
 find_package(SDL2 REQUIRED)
 find_package(Box2D REQUIRED)
 
-include_directories(src ${SDL2_INCLUDE_DIRS} src/gameEngine)
+add_subdirectory(src/SANDAL2)
+include_directories(src ${SDL2_INCLUDE_DIRS} src/gameEngine src/SANDAL2/src)
 
-file(GLOB_RECURSE sandal2_sources src/SANDAL2/*.c)
-add_library(sandal2 ${sandal2_sources})
-target_link_libraries(sandal2
-  ${SDL2_LIBRARIES}
-  SDL2_ttf
-  SDL2_image
-  SDL2_mixer
-  )
+# file(GLOB_RECURSE sandal2_sources src/SANDAL2/src/*.c)
+# add_library(sandal2 ${sandal2_sources})
+# target_link_libraries(sandal2
+#   ${SDL2_LIBRARIES}
+#   SDL2_ttf
+#   SDL2_image
+#   SDL2_mixer
+#   )
 
 file(GLOB_RECURSE castor_sources src/gameEngine/*.cpp)
 add_library( castor ${castor_sources})
 target_link_libraries(castor
   sandal2
+  SDL2_mixer
   ${BOX2D_LIBRARIES}
   )
 

@@ -18,7 +18,7 @@
 #include "../viewport.h"
 #include "../position.h"
 
-#include "../../SANDAL2/Element.h"
+#include <Element.h>
 
 class Stage;
 
