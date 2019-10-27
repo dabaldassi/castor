@@ -58,12 +58,6 @@ public:
   void pause();
 
   /**
-   *\fn void options()
-   *\brief Load the option screen
-   */
-  void options();
-
-  /**
    *\fn void event_manager(bool (*statement)());
    *\brief Loop and manage events while the game is running
    *\param statement Statement that will be executed 

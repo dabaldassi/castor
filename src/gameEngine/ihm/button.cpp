@@ -3,8 +3,6 @@
 #include "font.h"
 
 using ihm::Button;
-using ihm::OptionButton;
-using ihm::KeyBindingButton;
 using ihm::PauseButton;
 
 void onmotion(Element * e)
@@ -34,7 +32,7 @@ void PauseButton::create(const char * text, int id, int d)
   int       w,h;
   
   getDimensionWindow(&w, &h);
-  Element * elem = Button::create(w/4, h * id/5.f, w/2, h/5, 50, FREE_MONO_BOLD, text, Color::white, SANDAL2_BLENDED, Color::black, d, 0);
+  Element * elem = Button::create(w/4, h * id/5.f, w/2, h/5, 50, CS_REGULAR, text, Color::white, SANDAL2_BLENDED, Color::black, d, 0);
 
   data = (int *) malloc(sizeof(int));
   *data = id;
@@ -44,38 +42,4 @@ void PauseButton::create(const char * text, int id, int d)
   setFreeDataElement(elem, free);
   setOnMouseMotionElement(elem, onmotion);
   setUnMouseMotionElement(elem, unmotion);
-}
-
-void OptionButton::create(const char *text, int id, int d)
-{
-  int     * data;
-  int       w,h;
-
-  getDimensionWindow(&w, &h);
-  
-  Element * elem = Button::create(w/4, h * id/6, w/2, h/6, 30, CS_REGULAR, text, Color::white, SANDAL2_BLENDED, Color::black, d, 0);
-
-  data = (int *) malloc(sizeof(int));
-  *data = id;
-
-  setOnClickElement(elem, click_options);
-  setDataElement(elem, data);
-  setFreeDataElement(elem, free);
-}
-
-void KeyBindingButton::create(const char * text, int id, int d)
-{
-  int     * data = NULL;
-  int       w,h;
-
-  getDimensionWindow(&w, &h);
-  
-  Element * elem = Button::create(2*w/3, id*h/12.f, w/8, h / 12, 50, FREE_MONO , text, Color::white, SANDAL2_BLENDED, Color::black, d, 0);
-
-  data = (int *) malloc(sizeof(int));
-  *data = id;
-
-  setOnClickElement(elem, click_keybind);
-  setDataElement(elem, data);
-  setFreeDataElement(elem, free);
 }

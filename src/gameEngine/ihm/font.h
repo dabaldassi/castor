@@ -1,7 +1,7 @@
 #ifndef FONT_H
 #define FONT_H
 
-#define FONT_PATH /usr/share/fonts/truetype/freefont/
+#define FONT_PATH font/
 #define STR(X,Y) #X#Y
 #define FONT_BUILD(X,Y) STR(X,Y) 
 
@@ -17,7 +17,5 @@
 #define FREE_SERIF_BOLD FONT_BUILD(FONT_PATH, FreeSerifBold.ttf)
 #define FREE_SERIF_BOLD_ITALIC FONT_BUILD(FONT_PATH, FreeSerifBoldItalic.ttf)
 #define FREE_SERIF_ITALIC FONT_BUILD(FONT_PATH, FreeSerifItalic.ttf)
-
-
 
 #endif /* FONT_H */

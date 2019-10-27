@@ -53,7 +53,6 @@ Item::Item(const std::string & name, const Position & p, float weight, float lif
   bodyDef.type = b2_dynamicBody;
   bodyDef.position.Set(pos.x + pos.w / 2, pos.y + pos.h/2);
   _body = Stage::world().CreateBody(&bodyDef);
-
   
   b2PolygonShape dynamicBox;
   dynamicBox.SetAsBox(pos.w/2.f, pos.h/2.f);
@@ -72,7 +71,7 @@ Item::Item(const std::string & name, const Position & p, float weight, float lif
   _body->SetMassData(&mass);
   
   _body->SetUserData((void *)this);
-  _owner = NULL;
+  _owner = nullptr;
 }
 
 void Item::update()

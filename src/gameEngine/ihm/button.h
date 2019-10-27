@@ -4,9 +4,6 @@
 #include "SANDAL2.h"
 
 void click_pause(Element * elem, int);
-void click_options(Element * elem, int);
-void click_keybind(Element * elem, int);
-
 
 namespace ihm {
 
@@ -38,28 +35,7 @@ namespace ihm {
   
     virtual ~PauseButton(){}
   };
-
-  /**
-   *\class PauseButton
-   *\brief Button that will be dislayed on the option screen
-   */
-
-  class OptionButton : public Button
-  {
-  public:
-    OptionButton(){}
-
-    static void create(const char * text, int id, int d);
   
-    virtual ~OptionButton(){}
-  };
-
-  class KeyBindingButton : public Button
-  {
-  public:
-
-    static void create(const char * text, int id, int d);
-  };
 }  // ihm
 
 #endif /* BUTTON_H */

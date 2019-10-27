@@ -207,7 +207,7 @@ namespace actor {
      *\brief Set a data to your actor
      *\param data A data of type Data or inheritance. Need to allocate with new (for now).
      */
-    
+
     void setData(Data * data);
 
     /**

@@ -10,7 +10,6 @@
 
 #include "ihm/keyboard.h"
 #include "ihm/button.h"
-#include "ihm/options.h"
 #include "ihm/color.h"
 
 Game::Game():stage{0,0}
@@ -114,43 +113,14 @@ bool pause_statement(float dt)
     {
       if(!getDataWindow((void **)&data) && data)
 	{
-	  switch(data->param)
-	    {
-	    case -1:
-	      ret = false; /* To quit the pause loop */
-	      data->param = 1; /* Reset the default value */
-	    case 2:
-	      data->param = 1;
-	      data->game->options();
-	      break;
-	    default:
-	      break;
-	    }
+	  if(data->param == -1) {	    
+	    ret = false; /* To quit the pause loop */
+	    data->param = 1; /* Reset the default value */
+	  }
 	}
     }
 
   return ret;
-}
-
-bool options_statement(float dt)
-{
-  int d;
-  
-  if(ihm::Keyboard::keys[PAUSE])
-    {
-      getDisplayCodeWindow(&d);
-      ihm::Keyboard::keys[PAUSE] = false;
-
-      /* If it's the not the option menu display, clear the current display and set the option menu */
-      if(d != Game::OPTIONS_D)
-	{
-	  clearDisplayCode(d);
-	  setDisplayCodeWindow(Game::OPTIONS_D);
-	}
-      else
-	return false;
-    }
-  return true;
 }
 
 void click_pause(Element * elem, int c)
@@ -165,24 +135,10 @@ void click_pause(Element * elem, int c)
 	case 1: /* Return to the game */
 	  dataw->param = -1;
 	  break;
-	case 2: /* Lauch option menu */
-	  dataw->param = 2;
-	  break;
 	case 3: /* Quit */
 	  dataw->param = 0;
 	  break;
 	}
-    }
-}
-
-void click_options(Element * elem, int c)
-{
-  void (*options[])() = {keybindings, ret};
-  int  * data = NULL;
-
-  if(!getDataElement(elem, (void **)&data) && data)
-    {
-      options[*data]();
     }
 }
 
@@ -192,9 +148,6 @@ void Game::event_manager(bool (*statement)(float))
   float        dt;
   bool         run = true;
   DataWindow * dataw;
-  ContactListener contact;
-
-  Stage::world().SetContactListener(&contact);
   
   while(run)
     {
@@ -223,15 +176,15 @@ void Game::event_manager(bool (*statement)(float))
 	run = false;
       
     }
-
-  Stage::world().SetContactListener(NULL);
-  
 }
 
 void Game::run(std::function<void(Stage *)> generate)
 {
   std::srand(std::time(nullptr));
+  ContactListener contact;
 
+  Stage::world().SetContactListener(&contact);
+  
   if(generate) stage.setGenerate(generate);
   
   stage.generate();
@@ -239,7 +192,8 @@ void Game::run(std::function<void(Stage *)> generate)
   setDisplayCodeWindow(GAME_D);
   event_manager(run_statement);
   clearDisplayCode(GAME_D);
-  
+
+   Stage::world().SetContactListener(nullptr);
   //stage.save();
 }
 
@@ -252,15 +206,12 @@ void Game::pause()
   createBlock(0, 0, w, h, Color::black, PAUSE_D, 0);
 
   ihm::PauseButton::create("Continuer", 1, PAUSE_D);
-  ihm::PauseButton::create("Option", 2, PAUSE_D);
   ihm::PauseButton::create("Quitter",3, PAUSE_D);
-
-  //elem = createButton(0, 0, 100, 50, 20, FONT_PAUSE, text, textColor, quality, couleurBlock, displayCode, plan);
 
   setDisplayCodeWindow(PAUSE_D);
 
   event_manager(pause_statement);
-
+  
   for (int i = 0; i < NB_KEYS; i++) { // Avoid interference with game display
     ihm::Keyboard::keys[i] = false;
   }
@@ -268,24 +219,3 @@ void Game::pause()
   clearDisplayCode(PAUSE_D);
   setDisplayCodeWindow(GAME_D);
 }
-
-void Game::options()
-{
-  int w,h;
-
-  getDimensionWindow(&w, &h);
-  
-  createBlock(0, 0, w, h, Color::black, OPTIONS_D, 0);
-
-  setDisplayCodeWindow(OPTIONS_D);
-
-  ihm::OptionButton::create("Clavier/souris", KEY_BINDING, OPTIONS_D);
-  ihm::OptionButton::create("Retour", RETURN, OPTIONS_D);
-
-  event_manager(options_statement);
-  
-  clearDisplayCode(OPTIONS_D);
-  setDisplayCodeWindow(PAUSE_D);
-}
-
-
