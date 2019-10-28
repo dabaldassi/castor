@@ -12,6 +12,8 @@
 #include "ihm/button.h"
 #include "ihm/color.h"
 
+#include "ihm/menu.h"
+
 Game::Game():stage{0,0}
 {}
 
@@ -60,7 +62,6 @@ Game::Game(int w, int h, const char * name):stage{w,h}
 Game::~Game()
 {
   Mix_Quit();
- 
   closeAllWindow(); /* close all windows */
   closeAllSANDAL2();
 }
@@ -92,54 +93,6 @@ bool run_statement(float dt)
     }
   
   return !data->game->stage.end();    
-}
-
-/**
- *\fn bool run_statement()
- *\brief Statement which will be executed in pause mode
- */
-
-bool pause_statement(float dt)
-{
-  bool          ret = true;
-  DataWindow  * data = NULL;
-
-  if(ihm::Keyboard::keys[PAUSE])
-    {
-      ihm::Keyboard::keys[PAUSE] = false;
-      ret = false;
-    }
-  else
-    {
-      if(!getDataWindow((void **)&data) && data)
-	{
-	  if(data->param == -1) {	    
-	    ret = false; /* To quit the pause loop */
-	    data->param = 1; /* Reset the default value */
-	  }
-	}
-    }
-
-  return ret;
-}
-
-void click_pause(Element * elem, int c)
-{
-  int        * data  = NULL;
-  DataWindow * dataw = NULL;
-
-  if(!getDataElement(elem, (void **)&data) && data && !getDataWindow((void **)&dataw) && dataw)
-    {
-      switch(*data)
-	{
-	case 1: /* Return to the game */
-	  dataw->param = -1;
-	  break;
-	case 3: /* Quit */
-	  dataw->param = 0;
-	  break;
-	}
-    }
 }
 
 void Game::event_manager(bool (*statement)(float))
@@ -200,17 +153,20 @@ void Game::run(std::function<void(Stage *)> generate)
 void Game::pause()
 {
   int w,h;
+  getDimensionWindow(&w,&h);
+  ihm::Menu<PAUSE_D> menu_pause(w,h);
 
-  getDimensionWindow(&w, &h);
-  
-  createBlock(0, 0, w, h, Color::black, PAUSE_D, 0);
+  menu_pause.setTitle("Pause");
+  menu_pause.setBackground([](){});
+  menu_pause.setTextColor(Color::white, Color::red);
+  menu_pause.addItem("Continuer", []() { return false; });
+  menu_pause.addItem("Quitter", []() {
+      DataWindow * dataw;
+      getDataWindow((void **)&dataw);
+      dataw->param = 0;
+      return false; });
 
-  ihm::PauseButton::create("Continuer", 1, PAUSE_D);
-  ihm::PauseButton::create("Quitter",3, PAUSE_D);
-
-  setDisplayCodeWindow(PAUSE_D);
-
-  event_manager(pause_statement);
+  menu_pause.run();
   
   for (int i = 0; i < NB_KEYS; i++) { // Avoid interference with game display
     ihm::Keyboard::keys[i] = false;
