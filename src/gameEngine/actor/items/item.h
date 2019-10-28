@@ -46,8 +46,8 @@ namespace actor {
     virtual void load(std::ifstream & in);
     virtual void save(std::ofstream & out);
     virtual void pick(Actor * actor);
-    virtual void addItem(Item * item){}
-    virtual void removeItem(Item * item){}
+    virtual void addItem(Item *){}
+    virtual void removeItem(Item *){}
     virtual void act(float dt);
 
     template <class T=Actor*>

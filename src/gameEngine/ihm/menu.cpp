@@ -4,13 +4,15 @@ using ihm::Menu;
 
 void onClickMenu(Element * e, int button)
 {
-  Menu<0> * m;
-  getDataElement(e, (void **) &m);
+  if(button == 1) {
+    Menu<0> * m;
+    getDataElement(e, (void **) &m);
 
-  char * name;
-  getTextElement(e,&name);
+    char * name;
+    getTextElement(e,&name);
   
-  m->shouldCall(name);
+    m->shouldCall(name);
+  }
 }
 
 void onmotion_item(Element * e)

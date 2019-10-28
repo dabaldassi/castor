@@ -16,7 +16,7 @@ Objective::Objective(std::string name, int limit, int id):Actor(name,1), _limit(
  
 }
 
-void Objective::update(Viewport const & vp)
+void Objective::update(Viewport const &)
 {
   if(_elem)
     {
@@ -58,7 +58,7 @@ FoodObjective::FoodObjective(std::string name, int limit, int id, int event[]):O
   event[FOOD] = 0;
 }
 
-void FoodObjective::act(float dt)
+void FoodObjective::act(float)
 {
   if(isComplete())
     {

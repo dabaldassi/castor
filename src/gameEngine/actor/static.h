@@ -12,8 +12,8 @@ namespace actor {
     Static(const std::string & name, const Position & pos);
       
     virtual void loadSprite();
-    virtual void addItem(Item * item){}
-    virtual void removeItem(Item * item){}
+    virtual void addItem(Item *){}
+    virtual void removeItem(Item *){}
   
     virtual ~Static(){}
   };

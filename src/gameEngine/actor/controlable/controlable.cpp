@@ -22,7 +22,7 @@ Controlable::Controlable(const std::string & name, float life, const Position & 
   _id = _nb_controlable_keyboard;
 }
 
-void Controlable::moveX(float dt)
+void Controlable::moveX(float)
 {
   b2Vec2 linearVelocity = _body->GetLinearVelocity();
   
@@ -38,7 +38,7 @@ void Controlable::moveX(float dt)
   _body->SetLinearVelocity(linearVelocity);
 }
 
-void Controlable::moveY(float dt)
+void Controlable::moveY(float)
 {
   b2Vec2 linearVelocity = _body->GetLinearVelocity();
   
@@ -54,7 +54,7 @@ void Controlable::moveY(float dt)
    _body->SetLinearVelocity(linearVelocity);
 }
 
-void Controlable::move(float dt)
+void Controlable::move(float)
 {
   int    o[16] = {_orientation,N,S,_orientation,W,NE,SW,W,E,NW,SE,E,_orientation,N,S,_orientation};
   b2Vec2 linearVelocity = _body->GetLinearVelocity();
@@ -126,8 +126,8 @@ void Controlable::load(std::ifstream &in)
     }
 }
 
-void Controlable::saveAnnexe(std::ofstream &out)
+void Controlable::saveAnnexe(std::ofstream &)
 {}
 
-void Controlable::loadAnnexe(std::ifstream & in)
+void Controlable::loadAnnexe(std::ifstream &)
 {}

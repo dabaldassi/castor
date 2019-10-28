@@ -39,8 +39,8 @@ namespace actor {
     FoodObjective(std::string name, int limit, int id, int event[]);
 
     virtual void act(float dt);
-    virtual void addItem(Item * item){}
-    virtual void removeItem(Item * item){}
+    virtual void addItem(Item *){}
+    virtual void removeItem(Item *){}
   };
 
 

@@ -162,7 +162,7 @@ void Stage::addMusic(const char *name)
 void Stage::playMusic(unsigned int id, int loop)
 {
   if(id < _music.size()) {
-    Mix_PlayMusic(_music[id], -1);
+    Mix_PlayMusic(_music[id], loop);
   }
 }
 

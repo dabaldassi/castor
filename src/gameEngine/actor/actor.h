@@ -186,14 +186,14 @@ namespace actor {
      *\brief Save data in the actor that contain other actor
      */
     
-    virtual void saveAnnexe(std::ofstream & out) {}
+    virtual void saveAnnexe(std::ofstream &) {}
 
     /**
      *\fn virtual void loadAnnexe(std::ifstream & in)
      *\brief Load the annexe of a actor
      */
     
-    virtual void loadAnnexe(std::ifstream & in) {}
+    virtual void loadAnnexe(std::ifstream &) {}
 
 
     virtual void collisionOn(Actor * actor);
