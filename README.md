@@ -2,24 +2,24 @@
 
 This is a game engine using the actor pattern.
 
-It uses the library SANDAL2 to handle graphics.
+It uses the library SANDAL2 to handle graphics and SDL2_mixer for sound.
 
 ## Compiling
 
 You need SANDAL2 ( and SDL2 ) to compile it.
 
 ```
->cd castor
+> cd castor
 
->git submodule init src/SANDAL2
+> git submodule update --init
 
->git submodule update src/SANDAL2
+> mkdir build && cd build
 
->mkdir build
+> cmake ..
 
->cd build
-
->cmake ..
-
->make
+> make
 ```
+
+## New Castor
+
+I'm restarting the project to do a better game engine with a better conception and interface and will add a lot of new features (audio engine, network, shader, ...). It can be found [here](https://github.com/dabaldassi/castor-engine)
